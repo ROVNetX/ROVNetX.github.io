@@ -2336,6 +2336,47 @@ body.modal-open {
     padding: 0.55rem 0.65rem;
   }
 
+  /* Platform/Ortak Yapi: mobilde tum kartlar ve metinler dikey akista kalsin */
+  #slideShared {
+    overflow-x: hidden;
+  }
+
+  #slideShared .platform-nav {
+    grid-template-columns: 1fr;
+  }
+
+  #slideShared .platform-nav a {
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  #slideShared .content-split,
+  #slideShared .tiles,
+  #slideShared .swarm-showcase,
+  #slideShared .video-grid,
+  #slideShared .video-grid--relaxed {
+    grid-template-columns: 1fr;
+  }
+
+  #slideShared .stack-section,
+  #slideShared .stack-section > * {
+    min-width: 0;
+  }
+
+  #slideShared .stack-section p,
+  #slideShared .stack-section li,
+  #slideShared .stack-section h3,
+  #slideShared .stack-section h4,
+  #slideShared figcaption {
+    overflow-wrap: anywhere;
+  }
+
+  #slideShared figcaption {
+    display: block;
+    max-width: 100%;
+    white-space: normal;
+  }
+
   .hull-viewer-head {
     align-items: start;
   }
