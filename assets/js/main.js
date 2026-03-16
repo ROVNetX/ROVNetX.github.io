@@ -1,4 +1,28 @@
-const revealTargets = document.querySelectorAll('.reveal');
+// ── Tüm videoları sayfa açılır açılmaz yükle ve oynat ─────────────────────
+// .reveal ile opacity:0 olan section'lar içindeki videolar tarayıcı tarafından
+// görünmez sayılır ve preload yapılmaz. Bu fonksiyon bunu zorlar.
+(function eagerLoadVideos() {
+  const startAll = () => {
+    document.querySelectorAll('video').forEach(vid => {
+      vid.preload = 'auto';
+      vid.load();
+      const promise = vid.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // Tarayıcı politikası engellerse sessizce geç; autoplay attribute zaten tekrar dener
+        });
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startAll);
+  } else {
+    startAll();
+  }
+})();
+
+
 
 const observer = new IntersectionObserver(
   (entries) => {
