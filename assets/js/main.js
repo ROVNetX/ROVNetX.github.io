@@ -31,8 +31,10 @@ const videoModalCaption = document.getElementById('videoModalCaption');
 if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
   const videoCards = Array.from(document.querySelectorAll('.video-card, .insight-card'));
   const isHoverDevice = window.matchMedia('(hover: hover)').matches;
+  const videoModalDialog = videoModal.querySelector('.video-modal__dialog');
+  let openedByHover = false;
 
-  const openVideoModal = (sourceVideo, captionText) => {
+  const openVideoModal = (sourceVideo, captionText, openMode = 'click') => {
     if (!sourceVideo) {
       return;
     }
@@ -47,6 +49,7 @@ if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
     videoModalPlayer.loop = true;
     videoModalPlayer.muted = false;
     videoModalCaption.textContent = captionText || 'Video oynatiliyor';
+    openedByHover = openMode === 'hover';
 
     videoModal.classList.add('is-open');
     videoModal.setAttribute('aria-hidden', 'false');
@@ -68,6 +71,7 @@ if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
     videoModalPlayer.removeAttribute('src');
     videoModalPlayer.load();
     videoModalCaption.textContent = '';
+    openedByHover = false;
   };
 
   for (const card of videoCards) {
@@ -85,20 +89,20 @@ if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
     card.setAttribute('aria-label', `${caption} videosunu popup olarak ac`);
 
     card.addEventListener('click', () => {
-      openVideoModal(cardVideo, caption);
+      openVideoModal(cardVideo, caption, 'click');
     });
 
     card.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        openVideoModal(cardVideo, caption);
+        openVideoModal(cardVideo, caption, 'click');
       }
     });
 
     if (isHoverDevice) {
       card.addEventListener('mouseenter', () => {
         hoverTimer = window.setTimeout(() => {
-          openVideoModal(cardVideo, caption);
+          openVideoModal(cardVideo, caption, 'hover');
         }, 450);
       });
 
@@ -112,6 +116,14 @@ if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
   }
 
   videoModalClose.addEventListener('click', closeVideoModal);
+
+  if (isHoverDevice && videoModalDialog) {
+    videoModalDialog.addEventListener('mouseleave', () => {
+      if (openedByHover && videoModal.classList.contains('is-open')) {
+        closeVideoModal();
+      }
+    });
+  }
 
   videoModal.addEventListener('click', (event) => {
     if (event.target === videoModal) {

@@ -1,0 +1,10 @@
+[
+  {
+    "id": "hava-ses-db",
+    "title": "Havadaki Sesin Uzakliga Bagli dB Analizi",
+    "path": "Datas/havadasesinuzakligabagliDBli.csv",
+    "description": "Farkli frekans ve uzakliklarda olculen maksimum ve ortalama ses siddeti verileri.",
+    "preferredX": "uzaklik",
+    "preferredY": "ortalama_db"
+  }
+]

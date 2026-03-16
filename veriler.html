@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROVNet Veriler - CSV Veri Panosu</title>
+  <meta name="description" content="ROVNet test verileri, CSV tablolar ve otomatik grafik panosu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="data-page-body">
+  <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="Background/ocean.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <header class="topbar glass">
+    <a class="brand" href="index.html" aria-label="ROVNet ana sayfa">
+      <span class="brand-mark">R</span>
+      <span class="brand-text">ROVNet Veriler</span>
+    </a>
+
+    <nav class="section-nav" aria-label="Sayfa navigasyonu">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="veriler.html" class="active">Veriler</a>
+    </nav>
+  </header>
+
+  <main class="deck data-deck">
+    <section class="slide data-hero">
+      <div class="hero-inner data-hero__inner">
+        <p class="eyebrow">Veri Paneli</p>
+        <h1>CSV Test Verileri</h1>
+        <p class="subtitle">`Datas/` altindaki test dosyalarini secip grafik, metrik ve ham tablo olarak inceleyin.</p>
+        <div class="data-note-row">
+          <div class="data-note-card glass">
+            <strong>Yeni veri ekleme</strong>
+            <p>Yeni CSV dosyasini Datas klasorune koyup assets/data/datasets.json dosyasina yolunu eklemeniz yeterli.</p>
+          </div>
+          <div class="data-note-card glass">
+            <strong>Amac</strong>
+            <p>Juri veya yatirimciya ham veriyi, secilebilir eksenlerle ve otomatik grafiklerle dogrudan gostermek.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide data-dashboard">
+      <div class="data-layout">
+        <aside class="data-sidebar glass">
+          <div class="data-panel-head">
+            <h2 class="slide-title data-panel-title">Veri Setleri</h2>
+            <p>Kullanilabilir CSV dosyalari</p>
+          </div>
+          <div class="manual-loader">
+            <label class="select-field">
+              <span>CSV yolu veya dosya adi</span>
+              <input id="datasetPathInput" class="data-path-input" type="text" placeholder="Datas/ornek.csv">
+            </label>
+            <button id="datasetPathButton" class="dataset-path-button" type="button">Yolu Yukle</button>
+          </div>
+          <div id="datasetList" class="dataset-list" aria-live="polite"></div>
+        </aside>
+
+        <div class="data-main">
+          <section class="data-card glass">
+            <div class="data-panel-head">
+              <div>
+                <h2 id="datasetTitle" class="slide-title data-panel-title">Veri seciliyor</h2>
+                <p id="datasetDescription">Manifest yukleniyor...</p>
+              </div>
+              <a id="datasetFileLink" class="dataset-file-link" href="#" target="_blank" rel="noopener noreferrer">CSV dosyasini ac</a>
+            </div>
+
+            <div class="stat-grid" id="datasetStats"></div>
+
+            <div class="chart-toolbar">
+              <label class="select-field">
+                <span>X Ekseni</span>
+                <select id="xAxisSelect"></select>
+              </label>
+              <label class="select-field">
+                <span>Y Ekseni</span>
+                <select id="yAxisSelect"></select>
+              </label>
+              <label class="select-field">
+                <span>Grafik Tipi</span>
+                <select id="chartTypeSelect">
+                  <option value="line">Cizgi</option>
+                  <option value="bar">Sutun</option>
+                  <option value="scatter">Noktasal</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="chart-wrap">
+              <canvas id="datasetChart" aria-label="CSV veri grafigi"></canvas>
+            </div>
+          </section>
+
+          <section class="data-card glass">
+            <div class="data-panel-head">
+              <div>
+                <h2 class="slide-title data-panel-title">Ham Veri Tablosu</h2>
+                <p id="tableCaption">Ilk satirlar burada gorunur.</p>
+              </div>
+            </div>
+            <div class="table-wrap data-table-wrap">
+              <table id="datasetTable" class="raw-table"></table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/data-viewer.js" defer></script>
+</body>
+</html>

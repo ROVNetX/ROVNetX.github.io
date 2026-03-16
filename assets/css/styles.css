@@ -550,22 +550,6 @@ figcaption {
   box-shadow: 0 0 0 3px rgba(77, 199, 255, 0.18), var(--shadow-hover);
 }
 
-.video-popup-trigger::after {
-  content: "Popup";
-  position: absolute;
-  right: 0.7rem;
-  top: 0.7rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #dff3ff;
-  border: 1px solid rgba(170, 216, 255, 0.3);
-  border-radius: 999px;
-  padding: 0.2rem 0.5rem;
-  background: rgba(4, 12, 28, 0.62);
-  pointer-events: none;
-}
-
 .video-card video {
   width: 100%;
   height: 220px;
@@ -749,6 +733,244 @@ tr:last-child td {
   font-size: 0.85rem;
 }
 
+.data-page-body {
+  min-height: 100vh;
+}
+
+.data-deck {
+  padding-bottom: 3rem;
+}
+
+.data-hero {
+  min-height: auto;
+}
+
+.data-hero__inner {
+  max-width: 100%;
+}
+
+.data-note-row {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.data-note-card {
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+}
+
+.data-note-card strong {
+  display: block;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.data-note-card p {
+  margin: 0;
+}
+
+.data-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.data-sidebar,
+.data-card {
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+
+.data-main {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.data-panel-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.data-panel-head p {
+  margin: 0.3rem 0 0;
+  color: var(--txt-soft);
+}
+
+.data-panel-title {
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.dataset-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.manual-loader {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.data-path-input {
+  border: 1px solid rgba(110, 168, 255, 0.26);
+  border-radius: 12px;
+  background: rgba(6, 14, 34, 0.86);
+  color: var(--txt-main);
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.dataset-path-button {
+  border: 1px solid rgba(77, 199, 255, 0.3);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(18, 44, 88, 0.86), rgba(9, 18, 38, 0.72));
+  color: var(--txt-main);
+  padding: 0.8rem 1rem;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.dataset-path-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(77, 199, 255, 0.48);
+}
+
+.dataset-button {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(110, 170, 255, 0.18);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(12, 23, 52, 0.76), rgba(4, 9, 22, 0.62));
+  color: var(--txt-main);
+  padding: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.dataset-button:hover,
+.dataset-button.is-active {
+  transform: translateY(-2px);
+  border-color: rgba(77, 199, 255, 0.42);
+  box-shadow: 0 12px 28px rgba(0, 8, 28, 0.42);
+}
+
+.dataset-button strong,
+.dataset-button span,
+.dataset-button small {
+  display: block;
+}
+
+.dataset-button span {
+  color: var(--accent);
+  margin-top: 0.35rem;
+  font-size: 0.84rem;
+  word-break: break-all;
+}
+
+.dataset-button small {
+  margin-top: 0.45rem;
+  color: var(--txt-soft);
+  font-size: 0.85rem;
+}
+
+.dataset-file-link {
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid rgba(77, 199, 255, 0.3);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  white-space: nowrap;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.stat-chip {
+  border: 1px solid rgba(110, 168, 255, 0.18);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(10, 20, 44, 0.78), rgba(5, 11, 26, 0.62));
+  padding: 0.85rem 0.9rem;
+}
+
+.stat-chip__label {
+  display: block;
+  color: var(--txt-soft);
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.stat-chip__value {
+  color: var(--txt-main);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.4rem;
+}
+
+.chart-toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.select-field {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--txt-soft);
+  font-size: 0.88rem;
+}
+
+.select-field select {
+  border: 1px solid rgba(110, 168, 255, 0.26);
+  border-radius: 12px;
+  background: rgba(6, 14, 34, 0.86);
+  color: var(--txt-main);
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+}
+
+.chart-wrap {
+  position: relative;
+  min-height: 420px;
+  border: 1px solid rgba(110, 168, 255, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(6, 14, 34, 0.72), rgba(4, 10, 24, 0.58));
+  padding: 1rem;
+}
+
+.data-table-wrap {
+  max-height: 540px;
+}
+
+.raw-table {
+  min-width: 100%;
+}
+
+.raw-table td,
+.raw-table th {
+  white-space: nowrap;
+}
+
+.empty-state {
+  border: 1px dashed rgba(120, 180, 255, 0.24);
+  border-radius: 14px;
+  padding: 1rem;
+  color: var(--txt-soft);
+  background: rgba(5, 12, 28, 0.45);
+}
+
 body.modal-open {
   overflow: hidden;
 }
@@ -838,6 +1060,18 @@ body.modal-open {
     top: 0.6rem;
   }
 
+  .data-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chart-wrap {
+    min-height: 360px;
+  }
+
   .grid-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -895,6 +1129,20 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 
+  .data-note-row,
+  .chart-toolbar,
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .data-panel-head {
+    flex-direction: column;
+  }
+
+  .dataset-file-link {
+    white-space: normal;
+  }
+
   .h-250,
   .h-300,
   .h-350,
@@ -945,6 +1193,11 @@ body.modal-open {
     height: 38px;
     margin-bottom: 0.5rem;
   }
+
+  .chart-wrap {
+    min-height: 320px;
+    padding: 0.7rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -987,6 +1240,20 @@ body.modal-open {
 
   .table-wrap {
     border-radius: 12px;
+  }
+
+  .data-sidebar,
+  .data-card,
+  .data-note-card {
+    padding: 0.85rem;
+  }
+
+  .dataset-button {
+    padding: 0.8rem;
+  }
+
+  .chart-wrap {
+    min-height: 280px;
   }
 
   th,
