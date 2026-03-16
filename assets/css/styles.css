@@ -2338,7 +2338,13 @@ body.modal-open {
 
   /* Platform/Ortak Yapi: mobilde tum kartlar ve metinler dikey akista kalsin */
   #slideShared {
-    overflow-x: hidden;
+    overflow-x: visible;
+  }
+
+  #slideShared .shared-vertical-content {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
   }
 
   #slideShared .platform-nav {
@@ -2363,6 +2369,16 @@ body.modal-open {
     min-width: 0;
   }
 
+  #slideShared figure,
+  #slideShared .media-shell,
+  #slideShared .bullet-panel,
+  #slideShared .tile,
+  #slideShared .insight-card,
+  #slideShared .video-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
   #slideShared .stack-section p,
   #slideShared .stack-section li,
   #slideShared .stack-section h3,
@@ -2377,6 +2393,20 @@ body.modal-open {
     white-space: normal;
   }
 
+
+/* Firefox mobilde kasmayi azalt: agir arka plan katmanlarini sadeleştir */
+@supports (-moz-appearance: none) {
+  @media (max-width: 1024px) {
+    .bg-video,
+    .aurora {
+      display: none;
+    }
+
+    .bg-overlay {
+      background: linear-gradient(165deg, rgba(2, 8, 22, 0.72), rgba(2, 7, 18, 0.82));
+    }
+  }
+}
   .hull-viewer-head {
     align-items: start;
   }
