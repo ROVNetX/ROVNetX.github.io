@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROVNet - Donanımdan Bağımsız Bilişsel Sürü Ekosistemi</title>
-  <meta name="description" content="ROVNet: Donanımdan bağımsız bilişsel su altı sürü ekosistemi sunumu.">
+  <title>ROVNetX - Donanımdan Bağımsız Bilişsel Sürü Ekosistemi</title>
+  <meta name="description" content="ROVNetX: donanımdan bağımsız bilişsel su altı sürü ekosistemi sunumu ve veri paneli.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
+<body class="single-experience">
   <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
     <source src="Background/ocean.mp4" type="video/mp4">
   </video>
   <div class="bg-overlay" aria-hidden="true"></div>
   <div class="aurora" aria-hidden="true"></div>
 
-  <header class="topbar glass reveal">
-    <a class="brand" href="#slide1" aria-label="ROVNet ana sayfa">
-      <span class="brand-mark">R</span>
-      <span class="brand-text">ROVNet</span>
+  <header class="topbar glass">
+    <a class="brand" href="#slide1" aria-label="ROVNetX ana sayfa">
+      <img class="brand-logo" src="Pictures/ROVNetX.png" alt="ROVNetX logo" loading="eager">
+      <span class="brand-text hero-wordmark" aria-hidden="true">
+        <span class="hero-wordmark__main">R<span class="hero-wordmark__o">O</span>VNet</span><span class="hero-wordmark__x">X</span>
+      </span>
     </a>
 
     <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="sectionNav">
@@ -30,309 +32,670 @@
     </button>
 
     <nav id="sectionNav" class="section-nav" aria-label="Bölüm navigasyonu">
-      <a href="#slide1">Kapak</a>
-      <a href="#slide2">Platform</a>
-      <a href="#slide3">AMKS</a>
-      <a href="#slide4">SAM</a>
-      <a href="#slide5">Mimari</a>
-      <a href="#slide6">Testler</a>
-      <a href="#slide7">Gelir</a>
-      <a href="#slide8">Takım</a>
-      <a href="#slide9">Tecrübe</a>
-      <a href="veriler.html">Veriler</a>
-      <a href="#slide10">İletişim</a>
+      <a href="#slide1">Ana Sayfa</a>
+      <a href="#slideShared">Platform</a>
+      <a href="#slide9">Ar-Ge</a>
+      <a href="#slideCrew">Takım + İletişim</a>
+      <a href="#slide10">Veriler</a>
     </nav>
   </header>
 
-  <main class="deck">
-    <section class="slide hero reveal" id="slide1">
-      <div class="hero-inner">
-        <p class="eyebrow">TÜBİTAK 1812 BİGG Yatırımcı Sunumu</p>
-        <h1>ROVNet</h1>
-        <p class="subtitle">Donanımdan Bağımsız Bilişsel Su Altı Sürü Ekosistemi</p>
-        <p class="quote">"Sessiz Derinliklerde Kesintisiz İletişim, Asimetrik Otonomi."</p>
-        <p class="tag">Saha Verileri ile Doğrulanmış Uygulamalı Ar-Ge Sunumu</p>
-      </div>
-    </section>
-
-    <section class="slide reveal" id="slide2">
-      <h2 class="slide-title">Fiziksel Platform ve İtki Matrisi</h2>
-      <p>Geliştirdiğimiz otonomi algoritmaları, 6-DoF (6 Serbestlik Dereceli) manevra kabiliyetine sahip BlueROV2 mimarisi üzerinde test edilmiştir. Bu sayede araçlar akıntı altında bile kusursuz stabilizasyon sağlar.</p>
-      <div class="grid-2 media-grid">
-        <figure>
-          <div class="media-shell h-300">
-            <img src="Pictures/BlueRov2.png" alt="BlueROV2 Genel Görünüm" loading="lazy">
+  <main id="mainDeck" class="deck single-deck">
+    <section class="slide hero hero-cover reveal" id="slide1">
+      <div class="hero-inner hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-wordmark" aria-label="ROVNetX">
+            <span class="hero-wordmark__main">R<span class="hero-wordmark__o">O</span>VNet</span><span class="hero-wordmark__x">X</span>
+          </h1>
+          <p class="subtitle">Donanımdan Bağımsız Bilişsel Su Altı Sürü Ekosistemi</p>
+          <p class="tag">Saha Verileri, Simülasyonlar ve Ham CSV Analizleri ile Doğrulanmış Ar-Ge Sunumu</p>
+          <div class="hero-actions">
+            <a class="hero-link" href="#slide6">Saha Testlerine Git</a>
+            <a class="hero-link hero-link--alt" href="#slide10">Veri Panelini Aç</a>
           </div>
-          <figcaption>BlueROV2 Fiziksel Arayüzü</figcaption>
-        </figure>
-        <figure>
-          <div class="media-shell h-300">
-            <img src="Pictures/Blurov2MotorYerlesimYerleri.png" alt="Motor Yerleşimleri" loading="lazy">
+        </div>
+        <div class="hero-brand-card glass">
+          <img class="hero-logo" src="Pictures/ROVNetX.png" alt="ROVNetX yatay marka gorseli" loading="eager">
+          <div class="hero-metrics">
+            <article class="hero-metric">
+              <span>Platform</span>
+              <strong>BlueROV2 + SAM</strong>
+            </article>
+            <article class="hero-metric">
+              <span>Karar Katmanı</span>
+              <strong>LLM + RL + A*</strong>
+            </article>
+            <article class="hero-metric">
+              <span>Kanıt Katmanı</span>
+              <strong>Video + CSV + Saha Testi</strong>
+            </article>
           </div>
-          <figcaption>Motor Yerleşimleri ve Vektörel İtki Matrisi</figcaption>
-        </figure>
+
+          <div class="home-team-brief">
+            <h3>Çekirdek Ekip ve Hızlı İletişim</h3>
+            <div class="home-team-list">
+              <article class="home-team-item">
+                <img src="Pictures/Persons/OmerFaruk.jpeg" alt="Ömer Faruk Çelik" loading="lazy">
+                <div>
+                  <strong>Ömer Faruk Çelik</strong>
+                  <span>Bilgisayar Mühendisi, Otonomi Mimarı</span>
+                  <a href="tel:05357350610">0535 735 06 10</a>
+                  <a href="https://www.linkedin.com/in/%C3%B6mer-faruk-%C3%A7elik-270b1314b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+              </article>
+              <article class="home-team-item">
+                <img src="Pictures/Persons/Hasan.png" alt="Hasan Gökhan Mercan" loading="lazy">
+                <div>
+                  <strong>Hasan Gökhan Mercan</strong>
+                  <span>Yazılım Mühendisi, Yapay Zeka Sorumlusu</span>
+                  <a href="tel:+905378184094">+90 537 818 40 94</a>
+                  <a href="https://www.linkedin.com/in/hasan-mercan-441810215/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+              </article>
+              <article class="home-team-item">
+                <img src="Pictures/Persons/Enes.png" alt="Enes Aysan" loading="lazy">
+                <div>
+                  <strong>Enes Aysan</strong>
+                  <span>Endüstri Mühendisi, İş Geliştirme ve Operasyon</span>
+                  <a href="tel:+905380632213">+90 538 063 22 13</a>
+                  <a href="https://www.linkedin.com/in/enesaysan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="slide reveal" id="slide3">
-      <h2 class="slide-title">AMKS: Matematiksel Doğrulama ve Konumlandırma</h2>
-      <p>Dışa bağımlı ve astronomik maliyetli konumlandırma sistemleri yerine geliştirdiğimiz özgün AMKS (Artırılabilir Menzilli Konumlandırma Sistemi) algoritması. Aşağıda, X, Y ve Z mesafeleri bilindiğinde ROV'un (nokta) Matplotlib ortamındaki teorik 3B hesaplama modelleri görülmektedir.</p>
-      <div class="grid-3 media-grid">
-        <div class="media-shell h-250">
-          <img src="Pictures/AMKS1.jpg" alt="AMKS Koordinat Hesaplama 1" loading="lazy">
+    <section class="slide reveal shared-vertical-slide" id="slideShared">
+      <div class="shared-vertical-content">
+        <div class="platform-nav-shell glass">
+          <nav class="platform-nav" aria-label="Platform alt bölümleri">
+            <a href="#slide2">Fiziksel Platform</a>
+            <a href="#slide3">AMKS</a>
+            <a href="#slide4">SAM</a>
+            <a href="#slide5">Mimari</a>
+            <a href="#slide6">Testler</a>
+            <a href="#slideBudget">Bütçe</a>
+          </nav>
         </div>
-        <div class="media-shell h-250">
-          <img src="Pictures/AMKS2.jpg" alt="AMKS Koordinat Hesaplama 2" loading="lazy">
-        </div>
-        <div class="media-shell h-250">
-          <img src="Pictures/AMKS3.jpg" alt="AMKS Koordinat Hesaplama 3" loading="lazy">
-        </div>
-      </div>
-      <p class="center-note">Derinlik ve Akustik Dalga Yansıması Kesitlemeleri</p>
-    </section>
 
-    <section class="slide reveal" id="slide4">
-      <h2 class="slide-title">Sualtı Akustik Modem (SAM) Sinyal Analizi</h2>
-      <div class="grid-2 content-split">
-        <div class="bullet-panel glass">
-          <p>Su altında elektromanyetik dalgaların sönümlenmesi nedeniyle iletişim kısıtlıdır. Sürü zekasının çekirdeği olan haberleşme için özel sinyal modülasyonları tasarlanmıştır:</p>
-          <ul class="bullet-list">
-            <li><strong>Modüle Edilmiş Sinyal:</strong> Parazit ve gürültüyü minimize ederek verinin su altı akustiğinde uzak mesafelere kayıpsız iletilmesini sağlar.</li>
-            <li><strong>Canlı Frekans Spektrumu:</strong> Donanım üzerinden canlı olarak ölçülen, sinyalin frekans bandındaki kararlılığını gösteren spektrum analizi (sağda).</li>
-          </ul>
-          <figure>
+        <article class="stack-section reveal" id="slide2">
+          <h2 class="slide-title">Fiziksel Platform ve İtki Matrisi</h2>
+          <p>Geliştirdiğimiz otonomi algoritmaları, 6-DoF (6 Serbestlik Dereceli) manevra kabiliyetine sahip BlueROV2 mimarisi üzerinde test edilmiştir. Bu sayede araçlar akıntı altında bile kusursuz stabilizasyon sağlar.</p>
+          <div class="grid-2 media-grid">
+            <figure>
+              <div class="media-shell h-300">
+                <img src="Pictures/BlueRov2.png" alt="BlueROV2 Genel Görünüm" loading="lazy">
+              </div>
+              <figcaption>BlueROV2 Fiziksel Arayüzü</figcaption>
+            </figure>
+            <figure>
+              <div class="media-shell h-300">
+                <img src="Pictures/Blurov2MotorYerlesimYerleri.png" alt="Motor Yerleşimleri" loading="lazy">
+              </div>
+              <figcaption>Motor Yerleşimleri ve Vektörel İtki Matrisi</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="stack-section reveal" id="slide3">
+          <h2 class="slide-title">AMKS: Matematiksel Doğrulama ve Konumlandırma</h2>
+          <p>Dışa bağımlı ve astronomik maliyetli konumlandırma sistemleri yerine geliştirdiğimiz özgün AMKS (Artırılabilir Menzilli Konumlandırma Sistemi) algoritması. Aşağıda, X, Y ve Z mesafeleri bilindiğinde ROV'un (nokta) Matplotlib ortamındaki teorik 3B hesaplama modelleri görülmektedir.</p>
+          <div class="grid-3 media-grid">
             <div class="media-shell h-250">
-              <img src="Pictures/moduleedilmissinyal.jpg" alt="Modüle Edilmiş Sinyal" loading="lazy">
+              <img src="Pictures/AMKS1.jpg" alt="AMKS Koordinat Hesaplama 1" loading="lazy">
             </div>
-            <figcaption>Teorik Modülasyon Çıktısı</figcaption>
-          </figure>
+            <div class="media-shell h-250">
+              <img src="Pictures/AMKS2.jpg" alt="AMKS Koordinat Hesaplama 2" loading="lazy">
+            </div>
+            <div class="media-shell h-250">
+              <img src="Pictures/AMKS3.jpg" alt="AMKS Koordinat Hesaplama 3" loading="lazy">
+            </div>
+          </div>
+          <p class="center-note">Derinlik ve Akustik Dalga Yansıması Kesitlemeleri</p>
+
+          <div class="amks-flow-shell glass">
+            <div class="amks-flow-head">
+              <div>
+                <p class="eyebrow">Yarının Teknoloji Liderleri</p>
+                <h3>AMKS Çalışma Şekli</h3>
+                <p>Ar-Ge klasöründeki sunumun başlıklarını web akışına dönüştürerek AMKS'nin problemi, çözüm mantığı, teknik uygulanabilirliği ve yol haritasını tek bakışta okunur hale getiriyoruz.</p>
+              </div>
+              <a class="hero-link hero-link--alt amks-flow-link" href="Ar-Ge/Yar%C4%B1n%C4%B1n%20Teknoloji%20Liderleri%20AMKS.pdf" target="_blank" rel="noopener noreferrer">PDF'yi Aç</a>
+            </div>
+
+            <div class="amks-flow-grid">
+              <article class="amks-step-card">
+                <i class="fa-solid fa-bullseye"></i>
+                <h4>Proje Amacı ve Hedef Kitle</h4>
+                <p>AMKS, maliyeti yüksek ve dışa bağımlı sualtı konumlandırma çözümlerine alternatif üretmek için geliştirildi. Hedef kullanım alanı; üniversite takımları, araştırma grupları ve düşük maliyetli saha operasyonlarıdır.</p>
+              </article>
+
+              <article class="amks-step-card">
+                <i class="fa-solid fa-compass-drafting"></i>
+                <h4>Çalışma Mantığı</h4>
+                <p>Sistem; ölçülen eksen/mesafe verilerini alır, üç boyutlu konum çözümünü üretir ve operatöre anlaşılır bir konumsal temsil sunar. Böylece araç pozisyonu pahalı dış altyapı olmadan yazılımsal olarak tahminlenir.</p>
+              </article>
+
+              <article class="amks-step-card">
+                <i class="fa-solid fa-microchip"></i>
+                <h4>Yenilikçilik ve Uygulanabilirlik</h4>
+                <p>Matematiksel modelleme, prototip haberleşme ve görselleştirme katmanları birlikte çalışır. Modüler yapısı sayesinde AMKS; SAM, sürü mimarisi ve saha görev planlayıcısıyla birleştirilebilir.</p>
+              </article>
+
+              <article class="amks-step-card">
+                <i class="fa-solid fa-road"></i>
+                <h4>Çıktılar ve Yol Haritası</h4>
+                <p>Mevcut çıktı; prototip haberleşme testleri, ilkel simülasyonlar ve konumlandırma doğrulama ekranlarıdır. Sonraki adım; menzil artırımı, saha kalibrasyonu ve çoklu araç görevlerinde kararlı entegrasyondur.</p>
+              </article>
+            </div>
+          </div>
+        </article>
+
+        <article class="stack-section reveal" id="slide4">
+          <h2 class="slide-title">Sualtı Akustik Modem (SAM) Sinyal Analizi</h2>
+          <div class="grid-2 content-split">
+            <div class="bullet-panel glass">
+              <p>Su altında elektromanyetik dalgaların sönümlenmesi nedeniyle iletişim kısıtlıdır. Sürü zekasının çekirdeği olan haberleşme için özel sinyal modülasyonları tasarlanmıştır:</p>
+              <ul class="bullet-list">
+                <li><strong>Modüle Edilmiş Sinyal:</strong> Parazit ve gürültüyü minimize ederek verinin su altı akustiğinde uzak mesafelere kayıpsız iletilmesini sağlar.</li>
+                <li><strong>Canlı Frekans Spektrumu:</strong> Donanım üzerinden canlı olarak ölçülen, sinyalin frekans bandındaki kararlılığını gösteren spektrum analizi (sağda).</li>
+              </ul>
+              <figure>
+                <div class="media-shell h-350 sam-equal-media">
+                  <img src="Pictures/moduleedilmissinyal.jpg" alt="Modüle Edilmiş Sinyal" loading="lazy">
+                </div>
+                <figcaption>Teorik Modülasyon Çıktısı</figcaption>
+              </figure>
+            </div>
+
+            <figure>
+              <div class="media-shell h-350 sam-equal-media">
+                <video autoplay loop muted playsinline preload="auto">
+                  <source src="Videos/web_canliFrekansSpekturumu_fixed.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption class="ok">Canlı Frekans Spektrumu Okuması (Çalışıyor)</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="stack-section reveal" id="slide5">
+          <h2 class="slide-title">"İlk Prensipler" Mimarisi: 3 Katmanlı Bilişsel Sürü</h2>
+          <p>LLM tabanlı karar mekanizmalarını entegre eden, araçların "kara kutu" olmadan tamamen otonom çalıştığı hiyerarşik yapı:</p>
+          <div class="grid-3 tiles">
+            <article class="tile">
+              <i class="fa-solid fa-route"></i>
+              <h3>1. Global Stratejik Planlayıcı (A*)</h3>
+              <p>Görevin genel verimliliğini yönetir. Bilinen statik engelleri analiz ederek enerji tüketimini minimize eden en optimal rotaları hesaplar.</p>
+            </article>
+            <article class="tile">
+              <i class="fa-solid fa-bezier-curve"></i>
+              <h3>2. Yerel Taktiksel Planlayıcı</h3>
+              <p>Sensörlerle haritada olmayan engeller tespit edildiğinde devreye girer. Ana rotayı terk etmeden güvenli bir sapma (detour) oluşturur.</p>
+            </article>
+            <article class="tile">
+              <i class="fa-solid fa-microchip"></i>
+              <h3>3. Anlık Adaptif Refleks (RL)</h3>
+              <p>Derin Pekiştirmeli Öğrenme ile dinamik tehditlere <strong>0.2 saniye</strong> gibi sürede tepki vererek çarpışmaları önleyen kayıp toleranslı sistemdir.</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="stack-section reveal" id="slide6">
+          <h2 class="slide-title">Saha Testleri ve Simülasyon Doğrulamaları</h2>
+          <p>BlueROV2 sürü formasyon, hedef takibi ve lider seçim algoritmaları için gerçekleştirilen saha/simülasyon testlerinden öne çıkan görseller ve video:</p>
+
+          <div class="swarm-showcase">
+            <figure class="insight-card">
+              <div class="media-shell h-250">
+                <img src="Pictures/bluerov2surusu.png" alt="BlueROV2 sürü formasyon testi görseli" loading="lazy">
+              </div>
+              <figcaption>BlueROV2 Sürüsü: A Plus Formasyon Testi</figcaption>
+            </figure>
+
+            <figure class="insight-card">
+              <div class="media-shell h-250">
+                <img src="Pictures/bluerov2surusu2.png" alt="BlueROV2 takip ve lider seçim testi görseli" loading="lazy">
+              </div>
+              <figcaption>Takip Senaryosu ve Dinamik Lider Seçimi</figcaption>
+            </figure>
+
+            <figure class="insight-card">
+              <div class="media-shell h-250">
+                <video autoplay loop muted playsinline preload="auto">
+                  <source src="Videos/bluerov2surusu.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption>BlueROV2 Sürüsü: Formasyon + Takip + Liderlik Videosu</figcaption>
+            </figure>
+          </div>
+
+          <div class="video-grid video-grid--relaxed">
+            <article class="video-card">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="Videos/web_mesajsending2_20sSonrasi_2xhizli_ppt_uyumlu.mp4" type="video/mp4">
+              </video>
+              <div class="video-info">
+                <h4>1. AMKS Protokolü (THS 3-4)</h4>
+                <p>TÜBİTAK 2209-A kapsamında geliştirilen prototip üzerinden sağlanan başarılı haberleşme testi.</p>
+              </div>
+            </article>
+            <article class="video-card">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="Videos/web_prototip_converted.mp4" type="video/mp4">
+              </video>
+              <div class="video-info">
+                <h4>2. Donanım Prototipi İletişim Testi</h4>
+                <p>İletişim protokollerinin optimize edilerek hızlandırılmış donanımsal doğrulama süreci.</p>
+              </div>
+            </article>
+            <article class="video-card">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="Videos/web_mauv_compressed.mp4" type="video/mp4">
+              </video>
+              <div class="video-info">
+                <h4>3. ROS Bilişsel Sürü Simülasyonu</h4>
+                <p>Kısıtlı iletişim ortamında çoklu ROV'ların (swarm) birbirlerine çarpmadan otonom filo yönetimi.</p>
+              </div>
+            </article>
+            <article class="video-card">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="Videos/web_submarine_converted.mp4" type="video/mp4">
+              </video>
+              <div class="video-info">
+                <h4>4. Ursina AMKS Veri İletimi</h4>
+                <p>AMKS konumlandırma protokolünün Python/Ursina ortamında görselleştirilen ilkel simülasyonu.</p>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="stack-section reveal" id="slideBudget">
+          <div class="budget-head">
+            <div>
+              <p class="eyebrow">Ticarileşme Katmanı</p>
+              <h2 class="slide-title">Bütçe</h2>
+              <p>Sürdürülebilir büyüme planımızı satış, lisans ve servis eksenlerinde net bütçe hedefleriyle sunuyoruz.</p>
+            </div>
+          </div>
+          <div class="table-wrap budget-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ürün / Hizmet Segmenti</th>
+                  <th>Operasyonel Görev Tanımı</th>
+                  <th>Yıllık Hacim Öngörüsü</th>
+                  <th>Araç/Lisans Hedef Bedeli</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tip 1: Askeri & Stratejik</strong></td>
+                  <td>Donanmalar için silahlı/silahsız otonom keşif ve koruma sürüleri. Hedef tespit ve imhası.</td>
+                  <td>2 Sürü (6 ROV)</td>
+                  <td class="price">~9.500.000 TL</td>
+                </tr>
+                <tr>
+                  <td><strong>Tip 2: Sivil & Ticari Satış</strong></td>
+                  <td>Baraj hasar tespiti, batık keşfi ve su ürünleri ağ kontrolü için hafif donanımlı ROV'lar.</td>
+                  <td>4 Sürü (12 ROV)</td>
+                  <td class="price">~2.000.000 TL</td>
+                </tr>
+                <tr>
+                  <td><strong>Tip 3: SaaS (Yazılım Lisans)</strong></td>
+                  <td>Diğer üreticilere donanım-bağımsız ROVNetX işletim sistemi ve haberleşme (SAM) lisansı.</td>
+                  <td>~10 Araç Lisansı</td>
+                  <td class="price">~100.000 TL / Ay</td>
+                </tr>
+                <tr>
+                  <td><strong>Tip 3: RaaS & Teknik Servis</strong></td>
+                  <td>KOBİ'ler için donanım kiralama, operasyon sonrası veri sağlama ve yedek parça/bakım.</td>
+                  <td>5 Araç Kira + Servis</td>
+                  <td class="price">~150.000 TL / Ay</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="slide reveal research-slide" id="slide9">
+      <div class="research-scroll">
+          <div class="arge-head">
+            <div>
+              <p class="eyebrow">Geçmiş Projeler, Kodlar ve Dokümanlar</p>
+              <h2 class="slide-title">Ar-Ge ve Teknik Birikim</h2>
+              <p>TÜBİTAK, TEKNOFEST ve kişisel mühendislik dokümantasyonu ile biriken teknik hafızayı; GitHub bağlantıları, indirilebilir PDF'ler ve saha kanıtlarıyla tek vitrinde topluyoruz.</p>
+            </div>
+            <div class="arge-kpi-row">
+              <article class="arge-kpi"><span>Proje Portföyü</span><strong>3 Referans Çalışma</strong></article>
+              <article class="arge-kpi"><span>Dokümantasyon</span><strong>97 Sayfa PDF</strong></article>
+              <article class="arge-kpi"><span>Programlar</span><strong>TÜBİTAK + TEKNOFEST</strong></article>
+            </div>
+          </div>
+
+          <div class="arge-project-grid">
+            <article class="arge-card">
+              <span class="arge-badge">ROVNet</span>
+              <h3>FıratROVNet</h3>
+              <p>Su altı araç mimarisi, görev koordinasyonu ve yazılım/donanım entegrasyonu ekseninde geliştirilen araştırma altyapısı.</p>
+              <ul class="arge-points">
+                <li>Sürü mantığına temel oluşturan görev ve araç kurguları</li>
+                <li>Gerçek sisteme taşınabilecek yazılım/donanım denemeleri</li>
+                <li>Teknik çıktıları repoda izlenebilir geliştirme geçmişi</li>
+              </ul>
+              <div class="doc-actions">
+                <a class="doc-action" href="https://github.com/FiratROVNet/FiratROVNet" target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
+            </article>
+
+            <article class="arge-card">
+              <span class="arge-badge">TEKNOFEST</span>
+              <h3>Atılay</h3>
+              <p>İnsansız su altı araç yarışması odağında saha testleri, araç entegrasyonu ve operasyonel doğrulama sürecini temsil eden çalışma hattı.</p>
+              <ul class="arge-points">
+                <li>Donanım entegrasyonu ve sızdırmazlık tecrübesi</li>
+                <li>Araç testi, görev senaryosu ve saha davranışı</li>
+                <li>Takım düzeyinde operasyonel çıktı üretimi</li>
+              </ul>
+              <div class="doc-actions">
+                <a class="doc-action" href="https://github.com/FiratROVNet/FiratROVNet" target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
+            </article>
+
+            <article class="arge-card">
+              <span class="arge-badge">TÜBİTAK 2209-A</span>
+              <h3>AMKS AUV Atılay</h3>
+              <p>AMKS tabanlı konumlandırma, veri iletimi ve prototip doğrulama mantığını bir araya getiren özgün teknik çalışma.</p>
+              <ul class="arge-points">
+                <li>Konum çözümü için düşük maliyetli yaklaşım</li>
+                <li>Prototip iletişim akışı ve görselleştirme adımları</li>
+                <li>Geliştirme tarihçesi ve teknik izlek dokümante edildi</li>
+              </ul>
+              <div class="doc-actions">
+                <a class="doc-action" href="https://github.com/OmerFaruk-Celik/AMKS_AUV_ATILAY" target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="doc-shelf">
+            <div class="doc-shelf-head">
+              <div>
+                <p class="eyebrow">Ar-Ge Klasörü</p>
+                <h3>PDF Doküman Rafı</h3>
+                <p>Her belge yeni sekmede açılabilir ve doğrudan indirilebilir. Böylece jüri hem özet görünümü korur hem de gerektiğinde tam dokümana iner.</p>
+              </div>
+            </div>
+
+            <div class="doc-shelf-grid">
+              <article class="doc-card">
+                <span class="doc-format">PDF</span>
+                <h4>AMKS Teknik Raporu</h4>
+                <p>TÜBİTAK 2209-A doğrultusunda geliştirilen AMKS yaklaşımının teknik omurgası ve deneysel arka planı.</p>
+                <div class="doc-meta">
+                  <span>31 sayfa</span>
+                  <span>2.4 MB</span>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-action" href="Ar-Ge/AMKS_tubitak2209A.pdf" target="_blank" rel="noopener noreferrer">Önizle</a>
+                  <a class="doc-action doc-action--secondary" href="Ar-Ge/AMKS_tubitak2209A.pdf" download>İndir</a>
+                </div>
+              </article>
+
+              <article class="doc-card">
+                <span class="doc-format">PDF</span>
+                <h4>Yarının Teknoloji Liderleri AMKS</h4>
+                <p>AMKS için hazırlanan sunum akışı; proje amacı, yenilikçilik, çıktılar ve yol haritasını kısa formatta toplar.</p>
+                <div class="doc-meta">
+                  <span>14 sayfa</span>
+                  <span>0.9 MB</span>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-action" href="Ar-Ge/Yar%C4%B1n%C4%B1n%20Teknoloji%20Liderleri%20AMKS.pdf" target="_blank" rel="noopener noreferrer">Önizle</a>
+                  <a class="doc-action doc-action--secondary" href="Ar-Ge/Yar%C4%B1n%C4%B1n%20Teknoloji%20Liderleri%20AMKS.pdf" download>İndir</a>
+                </div>
+              </article>
+
+              <article class="doc-card">
+                <span class="doc-format">PDF</span>
+                <h4>Sürü ROV Staj Araştırması</h4>
+                <p>Uzun soluklu staj araştırması içinde sürü yaklaşımı, teknik inceleme ve uygulama odaklı mühendislik notları yer alır.</p>
+                <div class="doc-meta">
+                  <span>52 sayfa</span>
+                  <span>3.3 MB</span>
+                </div>
+                <div class="doc-actions">
+                  <a class="doc-action" href="Ar-Ge/suruROVlarStajArastirmasi.pdf" target="_blank" rel="noopener noreferrer">Önizle</a>
+                  <a class="doc-action doc-action--secondary" href="Ar-Ge/suruROVlarStajArastirmasi.pdf" download>İndir</a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="arge-evidence-head">
+            <div>
+              <p class="eyebrow">Saha Kanıtı</p>
+              <h3>TEKNOFEST Atılay Test Kayıtları</h3>
+              <p>Donanım ve saha tecrübesini doğrudan video kanıtıyla destekleyen önceki yarışma/test kayıtları.</p>
+            </div>
+          </div>
+
+          <div class="grid-2 media-grid">
+            <figure>
+              <div class="media-shell h-350">
+                <iframe src="https://www.youtube.com/embed/j4oMw1Uq-Ok?rel=0" title="Atılay 2023 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <figcaption>2023 Atılay Takımı Araç Testi</figcaption>
+            </figure>
+            <figure>
+              <div class="media-shell h-350">
+                <iframe src="https://www.youtube.com/embed/mgCD8IVWUrQ?rel=0" title="Atılay 2024 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <figcaption>2024 Atılay Takımı Araç Testi</figcaption>
+            </figure>
+          </div>
+      </div>
+    </section>
+
+    <section class="slide reveal crew-contact-slide" id="slideCrew">
+      <div class="crew-contact-header">
+        <div>
+          <p class="eyebrow">İnsan ve İletişim Katmanı</p>
+          <h2 class="slide-title">Takım ve İletişim Merkezi</h2>
+          <p>Çekirdek ekibimizi ve operasyonel iletişim kanallarını tek bir modern katmanda, ana sayfa diliyle sunuyoruz.</p>
+        </div>
+        <div class="crew-kpi-row">
+          <article class="crew-kpi"><span>Kurucu Ekip</span><strong>3 Ana Rol</strong></article>
+          <article class="crew-kpi"><span>Odak</span><strong>Otonomi + YZ + Operasyon</strong></article>
+          <article class="crew-kpi"><span>İletişim</span><strong>GitHub ve E-posta</strong></article>
+        </div>
+      </div>
+
+      <div class="crew-contact-layout">
+        <div class="crew-team-grid">
+          <article class="crew-member-card glass">
+            <div class="member-head">
+              <div class="member-photo-wrap">
+                  <img class="member-photo" src="Pictures/Persons/OmerFaruk.jpeg" alt="Ömer Faruk Çelik" loading="lazy">
+              </div>
+              <div>
+                <h3>Ömer Faruk Çelik</h3>
+                <p class="role">Kurucu / Otonomi Mimarı</p>
+              </div>
+            </div>
+            <p>AMKS ve SAM odaklı saha testleri, otonomi mimarisi ve teknik yönlendirme.</p>
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:05357350610">0535 735 06 10</a></p>
+            <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/%C3%B6mer-faruk-%C3%A7elik-270b1314b/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ömer-faruk-çelik-270b1314b</a></p>
+          </article>
+
+          <article class="crew-member-card glass">
+            <div class="member-head">
+              <div class="member-photo-wrap">
+                  <img class="member-photo" src="Pictures/Persons/Hasan.png" alt="Hasan Gökhan Mercan" loading="lazy">
+              </div>
+              <div>
+                <h3>Hasan Gökhan Mercan</h3>
+                <p class="role">Kurucu Ortak / YZ Sorumlusu</p>
+              </div>
+            </div>
+            <p>Yapay zeka, görüntü işleme ve endüstriyel otomasyon altyapılarının tasarımı.</p>
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:+905378184094">+90 537 818 40 94</a></p>
+            <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/hasan-mercan-441810215/" target="_blank" rel="noopener noreferrer">linkedin.com/in/hasan-mercan-441810215</a></p>
+          </article>
+
+          <article class="crew-member-card glass">
+            <div class="member-head">
+              <div class="member-photo-wrap">
+                <img class="member-photo" src="Pictures/Persons/Enes.png" alt="Enes Aysan" loading="lazy">
+              </div>
+              <div>
+                <h3>Enes Aysan</h3>
+                <p class="role">İş Geliştirme ve Operasyon</p>
+              </div>
+            </div>
+            <p>Ticarileşme, pazar analizi, saha operasyonları ve büyüme stratejileri yönetimi.</p>
+            <p><i class="fa-solid fa-phone"></i> <a href="tel:+905380632213">+90 538 063 22 13</a></p>
+            <p><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/enesaysan/" target="_blank" rel="noopener noreferrer">linkedin.com/in/enesaysan</a></p>
+          </article>
         </div>
 
-        <figure>
-          <div class="media-shell h-400">
-            <video autoplay loop muted playsinline preload="auto">
-              <source src="Videos/web_canliFrekansSpekturumu_fixed.mp4" type="video/mp4">
-            </video>
-          </div>
-          <figcaption class="ok">Canlı Frekans Spektrumu Okuması (Çalışıyor)</figcaption>
-        </figure>
+        <aside class="crew-contact-card glass" id="slide11">
+          <h3>İletişim</h3>
+          <p>Projeye dair teknik dokümanlar, geçmiş çalışmalar ve demo içeriklerine doğrudan ulaşın.</p>
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:faruktrhakan@hotmail.com">faruktrhakan@hotmail.com</a></p>
+          <p><i class="fa-brands fa-github"></i> <a href="https://github.com/omerfaruk-celik" target="_blank" rel="noopener noreferrer">github.com/omerfaruk-celik</a></p>
+          <a class="hero-link crew-contact-link" href="#slide10">Veri paneline geç</a>
+          <p class="copyright">ROVNetX © 2026 | TÜBİTAK BİGG 1812</p>
+        </aside>
       </div>
     </section>
 
-    <section class="slide reveal" id="slide5">
-      <h2 class="slide-title">"İlk Prensipler" Mimarisi: 3 Katmanlı Bilişsel Sürü</h2>
-      <p>LLM tabanlı karar mekanizmalarını entegre eden, araçların "kara kutu" olmadan tamamen otonom çalıştığı hiyerarşik yapı:</p>
-      <div class="grid-3 tiles">
-        <article class="tile">
-          <i class="fa-solid fa-route"></i>
-          <h3>1. Global Stratejik Planlayıcı (A*)</h3>
-          <p>Görevin genel verimliliğini yönetir. Bilinen statik engelleri analiz ederek enerji tüketimini minimize eden en optimal rotaları hesaplar.</p>
-        </article>
-        <article class="tile">
-          <i class="fa-solid fa-bezier-curve"></i>
-          <h3>2. Yerel Taktiksel Planlayıcı</h3>
-          <p>Sensörlerle haritada olmayan engeller tespit edildiğinde devreye girer. Ana rotayı terk etmeden güvenli bir sapma (detour) oluşturur.</p>
-        </article>
-        <article class="tile">
-          <i class="fa-solid fa-microchip"></i>
-          <h3>3. Anlık Adaptif Refleks (RL)</h3>
-          <p>Derin Pekiştirmeli Öğrenme ile dinamik tehditlere <strong>0.2 saniye</strong> gibi sürede tepki vererek çarpışmaları önleyen kayıp toleranslı sistemdir.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="slide reveal" id="slide6">
-      <h2 class="slide-title">Saha Testleri ve Simülasyon Doğrulamaları</h2>
-      <p>BlueROV2 sürü formasyon, hedef takibi ve lider seçim algoritmaları için gerçekleştirilen saha/simülasyon testlerinden öne çıkan görseller ve video:</p>
-
-      <div class="swarm-showcase">
-        <figure class="insight-card">
-          <div class="media-shell h-250">
-            <img src="Pictures/bluerov2surusu.png" alt="BlueROV2 sürü formasyon testi görseli" loading="lazy">
-          </div>
-          <figcaption>BlueROV2 Sürüsü: A Plus Formasyon Testi</figcaption>
-        </figure>
-
-        <figure class="insight-card">
-          <div class="media-shell h-250">
-            <img src="Pictures/bluerov2surusu2.png" alt="BlueROV2 takip ve lider seçim testi görseli" loading="lazy">
-          </div>
-          <figcaption>Takip Senaryosu ve Dinamik Lider Seçimi</figcaption>
-        </figure>
-
-        <figure class="insight-card">
-          <div class="media-shell h-250">
-            <video autoplay loop muted playsinline preload="auto">
-              <source src="Videos/bluerov2surusu.mp4" type="video/mp4">
-            </video>
-          </div>
-          <figcaption>BlueROV2 Sürüsü: Formasyon + Takip + Liderlik Videosu</figcaption>
-        </figure>
+    <section class="slide reveal data-dashboard-slide" id="slide10">
+      <div class="data-panel-head data-dashboard-head">
+        <div>
+          <p class="eyebrow">Veri Katmanı</p>
+          <h2 class="slide-title data-panel-title">Ham CSV Verileri ve Grafik Paneli</h2>
+          <p>Tek sayfa deneyimin içinden doğrudan test verilerini seçin, eksenleri değiştirin ve juriye ham datayı görsel olarak sunun.</p>
+        </div>
       </div>
 
-      <div class="video-grid">
-        <article class="video-card">
-          <video autoplay loop muted playsinline preload="auto">
-            <source src="Videos/web_mesajsending2_20sSonrasi_2xhizli_ppt_uyumlu.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h4>1. AMKS Protokolü (THS 3-4)</h4>
-            <p>TÜBİTAK 2209-A kapsamında geliştirilen prototip üzerinden sağlanan başarılı haberleşme testi.</p>
+      <div class="data-layout">
+        <aside class="data-sidebar glass">
+          <div class="data-panel-head">
+            <h3 class="slide-title data-panel-title">Veri Setleri</h3>
+            <p>Kullanılabilir CSV dosyaları</p>
           </div>
-        </article>
-        <article class="video-card">
-          <video autoplay loop muted playsinline preload="auto">
-            <source src="Videos/web_prototip_converted.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h4>2. Donanım Prototipi İletişim Testi</h4>
-            <p>İletişim protokollerinin optimize edilerek hızlandırılmış donanımsal doğrulama süreci.</p>
+          <div class="manual-loader">
+            <label class="select-field">
+              <span>CSV yolu veya dosya adı</span>
+              <input id="datasetPathInput" class="data-path-input" type="text" placeholder="Datas/ornek.csv">
+            </label>
+            <button id="datasetPathButton" class="dataset-path-button" type="button">Yolu Yükle</button>
           </div>
-        </article>
-        <article class="video-card">
-          <video autoplay loop muted playsinline preload="auto">
-            <source src="Videos/web_mauv_compressed.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h4>3. ROS Bilişsel Sürü Simülasyonu</h4>
-            <p>Kısıtlı iletişim ortamında çoklu ROV'ların (swarm) birbirlerine çarpmadan otonom filo yönetimi.</p>
-          </div>
-        </article>
-        <article class="video-card">
-          <video autoplay loop muted playsinline preload="auto">
-            <source src="Videos/web_submarine_converted.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h4>4. Ursina AMKS Veri İletimi</h4>
-            <p>AMKS konumlandırma protokolünün Python/Ursina ortamında görselleştirilen ilkel simülasyonu.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+          <div id="datasetList" class="dataset-list" aria-live="polite"></div>
+        </aside>
 
-    <section class="slide reveal" id="slide7">
-      <h2 class="slide-title">Gelir Modeli ve Ticarileşme Stratejisi</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Ürün / Hizmet Segmenti</th>
-              <th>Operasyonel Görev Tanımı</th>
-              <th>Yıllık Hacim Öngörüsü</th>
-              <th>Araç/Lisans Hedef Bedeli</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Tip 1: Askeri & Stratejik</strong></td>
-              <td>Donanmalar için silahlı/silahsız otonom keşif ve koruma sürüleri. Hedef tespit ve imhası.</td>
-              <td>2 Sürü (6 ROV)</td>
-              <td class="price">~9.500.000 TL</td>
-            </tr>
-            <tr>
-              <td><strong>Tip 2: Sivil & Ticari Satış</strong></td>
-              <td>Baraj hasar tespiti, batık keşfi ve su ürünleri ağ kontrolü için hafif donanımlı ROV'lar.</td>
-              <td>4 Sürü (12 ROV)</td>
-              <td class="price">~2.000.000 TL</td>
-            </tr>
-            <tr>
-              <td><strong>Tip 3: SaaS (Yazılım Lisans)</strong></td>
-              <td>Diğer üreticilere donanım-bağımsız ROVNet işletim sistemi ve haberleşme (SAM) lisansı.</td>
-              <td>~10 Araç Lisansı</td>
-              <td class="price">~100.000 TL / Ay</td>
-            </tr>
-            <tr>
-              <td><strong>Tip 3: RaaS & Teknik Servis</strong></td>
-              <td>KOBİ'ler için donanım kiralama, operasyon sonrası veri sağlama ve yedek parça/bakım.</td>
-              <td>5 Araç Kira + Servis</td>
-              <td class="price">~150.000 TL / Ay</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
- 
-
-    <section class="slide reveal" id="slide9">
-      <h2 class="slide-title">Saha ve Donanım Tecrübesi (TEKNOFEST Atılay)</h2>
-      <p>Ar-Ge ekibimizin donanım entegrasyonu, sızdırmazlık, itki sistemleri ve zorlu şartlarda su altı araç dinamiği konusundaki pratik saha tecrübesi, TEKNOFEST İnsansız Su Altı Sistemleri yarışmalarındaki geçmiş otonom test başarılarına dayanmaktadır.</p>
-      <div class="grid-2 media-grid">
-        <figure>
-          <div class="media-shell h-350">
-            <iframe src="https://www.youtube.com/embed/j4oMw1Uq-Ok?rel=0" title="Atılay 2023 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <figcaption>2023 Atılay Takımı Araç Testi</figcaption>
-        </figure>
-        <figure>
-          <div class="media-shell h-350">
-            <iframe src="https://www.youtube.com/embed/mgCD8IVWUrQ?rel=0" title="Atılay 2024 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <figcaption>2024 Atılay Takımı Araç Testi</figcaption>
-        </figure>
-      </div>
-    </section>
-
-
-   <section class="slide reveal" id="slide8">
-      <h2 class="slide-title">Çekirdek Ar-Ge ve Yönetim Kadrosu</h2>
-      <div class="grid-3 team-grid">
-        <article class="member-card">
-          <div class="member-head">
-            <div class="member-photo-wrap">
-              <img class="member-photo" src="Pictures/Persons/OmerFaruk.jpeg" alt="Ömer Faruk Çelik" loading="lazy">
+        <div class="data-main">
+          <section class="data-card glass">
+            <div class="data-panel-head">
+              <div>
+                <h3 id="datasetTitle" class="slide-title data-panel-title">Veri seçiliyor</h3>
+                <p id="datasetDescription">Manifest yükleniyor...</p>
+              </div>
+              <a id="datasetFileLink" class="dataset-file-link" href="#" target="_blank" rel="noopener noreferrer">CSV dosyasını aç</a>
             </div>
-            <div>
-              <h3>Ömer Faruk Çelik</h3>
-              <p class="role">Kurucu / Otonomi Mimarı</p>
+
+            <div class="stat-grid" id="datasetStats"></div>
+
+            <div class="chart-toolbar">
+              <label class="select-field">
+                <span>X Ekseni</span>
+                <select id="xAxisSelect"></select>
+              </label>
+              <label class="select-field">
+                <span>Y Ekseni</span>
+                <select id="yAxisSelect"></select>
+              </label>
+              <label class="select-field">
+                <span>Grafik Tipi</span>
+                <select id="chartTypeSelect">
+                  <option value="line">Çizgi</option>
+                  <option value="bar">Sütun</option>
+                  <option value="scatter">Noktasal</option>
+                </select>
+              </label>
             </div>
-          </div>
-          <p>Hacettepe Üniv. (Fizik Müh.) temelli, Fırat Üniv. Bilgisayar Müh. son sınıf öğrencisi.</p>
-          <p>TÜBİTAK 2209-A AMKS ve SAM iletişim protokolü donanım geliştiricisi.</p>
-          <p>Donanımdan bağımsız "İlk Prensipler" otonomi mimarisinin kurucusu.</p>
-        </article>
-        <article class="member-card">
-          <div class="member-head">
-            <div class="member-photo-wrap">
-              <img class="member-photo" src="Pictures/Persons/Hasan.png" alt="Hasan Gökhan Mercan" loading="lazy">
+
+            <div class="chart-wrap">
+              <canvas id="datasetChart" aria-label="CSV veri grafiği"></canvas>
             </div>
-            <div>
-              <h3>Hasan Gökhan Mercan</h3>
-              <p class="role">Kurucu Ortak / YZ Sorumlusu</p>
+          </section>
+
+          <section class="data-card glass">
+            <div class="data-panel-head">
+              <div>
+                <h3 class="slide-title data-panel-title">Ham Veri Tablosu</h3>
+                <p id="tableCaption">İlk satırlar burada görünür.</p>
+              </div>
             </div>
-          </div>
-          <p>Yazılım mimarisi, yapay zeka ve endüstriyel otomasyon alanında uzman.</p>
-          <p>Kriptarium Ar-Ge bünyesinde hareket/uzuv algılama takip sistemleri geliştiricisi.</p>
-          <p>HGM Yazılım kurucusu; yapay zeka destekli görüntü işleme yazılımları entegratörü.</p>
-        </article>
-        <article class="member-card">
-          <div class="member-head">
-            <div class="member-photo-wrap">
-              <img class="member-photo" src="Pictures/Persons/Enes.png" alt="Enes Aysan" loading="lazy">
+            <div class="table-wrap data-table-wrap">
+              <table id="datasetTable" class="raw-table"></table>
             </div>
-            <div>
-              <h3>Enes Aysan</h3>
-              <p class="role">İş Geliştirme & Operasyon</p>
+          </section>
+
+          <section class="data-card glass hull-viewer-card" id="hullViewerCard">
+            <div class="data-panel-head hull-viewer-head">
+              <div>
+                <h3 class="slide-title data-panel-title">Hull Ortam Görselleştirme</h3>
+                <p id="hullViewerSubtitle">hull_information.json yükleniyor...</p>
+              </div>
+              <div class="hull-nav-controls" aria-label="Ortam geçiş kontrolleri">
+                <button id="hullPrev" class="hull-nav-button" type="button" aria-label="Önceki ortam">
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <span id="hullPageIndicator" class="hull-page-indicator">0 / 0</span>
+                <button id="hullNext" class="hull-nav-button" type="button" aria-label="Sonraki ortam">
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          <p>Endüstri Mühendisi; üretim optimizasyonu, proses takibi ve ticarileştirme uzmanı.</p>
-          <p>Karakaya86'da Ford/Mercedes yatırım onaylı (24M TL) YZ hata kontrol projesi yöneticisi.</p>
-          <p>Patent, pazar analizi, lojistik süreç iyileştirme ve seri üretim operasyon sorumlusu.</p>
-        </article>
+
+            <div id="hullMeta" class="hull-meta-row" aria-live="polite"></div>
+
+            <div class="hull-canvas-wrap">
+              <canvas id="hullCanvas" aria-label="Hull ortam çizimi"></canvas>
+            </div>
+
+            <div class="hull-legend">
+              <span><i class="fa-solid fa-square" style="color:#2dd6ff"></i> Hull bölgesi</span>
+              <span><i class="fa-solid fa-circle" style="color:#ff5d6c"></i> ROV güncel</span>
+              <span><i class="fa-solid fa-diamond" style="color:#5ca8ff"></i> ROV hedef</span>
+              <span><i class="fa-solid fa-xmark" style="color:#ffb347"></i> Ada/engel</span>
+            </div>
+          </section>
+        </div>
       </div>
     </section>
 
-    <section class="slide reveal contact" id="slide10">
-      <h2>Bizi İnceleyin</h2>
-      <p>Projeye dair akademik kodlarımıza, geçmiş deneyimlerimize ve "İlk Prensipler" yaklaşımıyla kurduğumuz sürü zekası simülasyon repolarına GitHub üzerinden ulaşabilirsiniz.</p>
-      <div class="contact-card glass">
-        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:faruktrhakan@hotmail.com">faruktrhakan@hotmail.com</a></p>
-        <p><i class="fa-brands fa-github"></i> <a href="https://github.com/omerfaruk-celik" target="_blank" rel="noopener noreferrer">github.com/omerfaruk-celik</a></p>
-        <p><i class="fa-solid fa-chart-line"></i> <a href="veriler.html">CSV veri panelini ac</a></p>
-      </div>
-      <p class="copyright">ROVNet © 2026 | TÜBİTAK BİGG 1812</p>
-    </section>
   </main>
+
+  <div class="deck-controls" aria-label="Yatay sayfa kontrolleri">
+    <button id="prevSlide" class="deck-control" type="button" aria-label="Önceki sayfaya git">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <button id="nextSlide" class="deck-control" type="button" aria-label="Sonraki sayfaya git">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <div id="swipeHint" class="swipe-hint" aria-hidden="true">
+    <i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i>
+    <span>Yana kaydırarak sayfalar arasında geç</span>
+  </div>
 
   <div id="videoModal" class="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video popup oynatici">
     <div class="video-modal__dialog" role="document">
@@ -344,6 +707,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/data-viewer.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
