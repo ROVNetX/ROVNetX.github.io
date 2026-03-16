@@ -438,6 +438,22 @@ figcaption {
   gap: 1.2rem;
 }
 
+.swarm-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin: 1rem 0 1.4rem;
+}
+
+.insight-card {
+  margin: 0;
+  padding: 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(130, 183, 255, 0.34);
+  background: rgba(8, 15, 33, 0.5);
+  backdrop-filter: blur(8px);
+}
+
 .video-card {
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -632,6 +648,10 @@ tr:last-child td {
 
   .grid-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .swarm-showcase {
+    grid-template-columns: 1fr;
   }
 
   .video-grid {
