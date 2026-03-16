@@ -28,7 +28,7 @@ body {
   margin: 0;
   color: var(--txt-main);
   font-family: "Space Grotesk", sans-serif;
-  background: var(--bg-deep);
+  background: #020510;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -36,12 +36,14 @@ body {
 .bg-video {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
   z-index: -3;
-  filter: saturate(1.22) contrast(1.05) brightness(0.58);
+  filter: saturate(1.3) contrast(1.06) brightness(0.62);
 }
 
 .bg-overlay {
@@ -173,10 +175,10 @@ a {
   border-radius: var(--radius-lg);
   border: 1px solid rgba(140, 191, 255, 0.35);
   background:
-    linear-gradient(150deg, rgba(8, 21, 48, 0.64), rgba(4, 10, 24, 0.68)),
-    linear-gradient(0deg, rgba(100, 255, 200, 0.08), transparent 38%);
+    linear-gradient(150deg, rgba(6, 16, 38, 0.58), rgba(3, 8, 20, 0.62)),
+    linear-gradient(0deg, rgba(100, 255, 200, 0.07), transparent 38%);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(9px) saturate(125%);
+  backdrop-filter: blur(11px) saturate(130%);
   padding: clamp(1.2rem, 2vw, 2.2rem);
   position: relative;
   overflow: hidden;
