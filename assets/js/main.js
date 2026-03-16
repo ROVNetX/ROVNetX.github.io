@@ -9,7 +9,7 @@
       const promise = vid.play();
       if (promise !== undefined) {
         promise.catch(() => {
-          // Tarayıcı politikası engellerse sessizce geç; autoplay attribute zaten tekrar dener
+          // Tarayıcı politikası engellerse sessizce geç; autoplay zaten tekrar dener
         });
       }
     });
@@ -22,7 +22,8 @@
   }
 })();
 
-
+// ── Scroll reveal animasyonları ────────────────────────────────────────────
+const revealTargets = document.querySelectorAll('.reveal');
 
 const observer = new IntersectionObserver(
   (entries) => {
@@ -43,6 +44,7 @@ for (const node of revealTargets) {
   observer.observe(node);
 }
 
+// ── Mobil nav toggle ───────────────────────────────────────────────────────
 const navToggle = document.getElementById('navToggle');
 const sectionNav = document.getElementById('sectionNav');
 
@@ -61,6 +63,7 @@ if (navToggle && sectionNav) {
   });
 }
 
+// ── Aktif nav linki vurgulama ──────────────────────────────────────────────
 const sections = document.querySelectorAll('main section[id]');
 const navLinks = Array.from(document.querySelectorAll('.section-nav a'));
 
