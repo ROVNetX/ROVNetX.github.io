@@ -65,7 +65,7 @@ body {
   z-index: 2;
 }
 
-/* ── Grid ışık aurora katmanı ────────────────────────── */
+/* ── Aurora ışık katmanı ─────────────────────────────── */
 .aurora {
   position: fixed;
   inset: 0;
@@ -73,10 +73,8 @@ body {
   background-image:
     linear-gradient(120deg, rgba(77, 199, 255, 0.14), transparent 42%),
     linear-gradient(300deg, rgba(57, 230, 190, 0.13), transparent 38%),
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     radial-gradient(circle at 65% 72%, rgba(77, 199, 255, 0.18), transparent 34%);
-  background-size: auto, auto, 36px 36px, 36px 36px, auto;
+  background-size: auto, auto, auto;
   mask-image: radial-gradient(circle at center, #000 28%, transparent 100%);
   opacity: 0.85;
   z-index: 3;
