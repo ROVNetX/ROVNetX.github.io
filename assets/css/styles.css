@@ -541,6 +541,33 @@ figcaption {
   box-shadow: var(--shadow-hover);
 }
 
+.video-popup-trigger {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.video-popup-trigger:focus-visible {
+  border-color: rgba(77, 199, 255, 0.58);
+  box-shadow: 0 0 0 3px rgba(77, 199, 255, 0.18), var(--shadow-hover);
+}
+
+.video-popup-trigger::after {
+  content: "Popup";
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #dff3ff;
+  border: 1px solid rgba(170, 216, 255, 0.3);
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  background: rgba(4, 12, 28, 0.62);
+  pointer-events: none;
+}
+
 .video-card video {
   width: 100%;
   height: 220px;
@@ -724,6 +751,67 @@ tr:last-child td {
   font-size: 0.85rem;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(2, 9, 22, 0.72);
+  backdrop-filter: blur(7px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.video-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.video-modal__dialog {
+  width: min(980px, 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(112, 178, 255, 0.35);
+  background: linear-gradient(145deg, rgba(7, 17, 38, 0.92), rgba(3, 8, 22, 0.94));
+  box-shadow: 0 26px 70px rgba(0, 4, 16, 0.7);
+  padding: 0.8rem;
+}
+
+.video-modal__close {
+  width: 42px;
+  height: 42px;
+  margin-left: auto;
+  margin-bottom: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(136, 186, 255, 0.35);
+  background: rgba(5, 12, 28, 0.8);
+  color: #d8ecff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.video-modal__player {
+  width: 100%;
+  max-height: min(70vh, 620px);
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 180, 255, 0.28);
+  background: #000;
+}
+
+.video-modal__caption {
+  margin: 0.7rem 0 0;
+  color: #d8e9ff;
+  font-size: 0.9rem;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(18px) scale(0.99);
@@ -771,6 +859,9 @@ tr:last-child td {
   }
 
   .topbar {
+    top: 0.4rem;
+    width: calc(100% - 0.7rem);
+    padding: 0.72rem 0.75rem;
     flex-wrap: wrap;
   }
 
@@ -782,6 +873,7 @@ tr:last-child td {
   .section-nav {
     width: 100%;
     justify-content: flex-start;
+    align-content: flex-start;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -789,8 +881,15 @@ tr:last-child td {
   }
 
   .section-nav.is-open {
-    max-height: 240px;
+    max-height: 72vh;
+    overflow-y: auto;
+    padding: 0.45rem 0 0.2rem;
     opacity: 1;
+  }
+
+  .section-nav a {
+    font-size: 0.82rem;
+    padding: 0.42rem 0.7rem;
   }
 
   .grid-2,
@@ -809,7 +908,15 @@ tr:last-child td {
   }
 
   .slide {
-    padding: 1rem;
+    padding: 1rem 0.9rem;
+  }
+
+  .slide-title {
+    font-size: clamp(1.35rem, 6vw, 1.75rem);
+  }
+
+  .hero {
+    min-height: 65vh;
   }
 
   .member-photo-wrap {
@@ -817,7 +924,75 @@ tr:last-child td {
     height: 74px;
   }
 
+  .member-card {
+    padding: 1.15rem 1rem 1.05rem 1.25rem;
+  }
+
   .video-card video {
-    height: 200px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-modal {
+    padding: 0.65rem;
+  }
+
+  .video-modal__dialog {
+    padding: 0.6rem;
+    border-radius: 14px;
+  }
+
+  .video-modal__close {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 560px) {
+  :root {
+    --slide-width: calc(100% - 0.5rem);
+  }
+
+  .deck {
+    gap: 1.5rem;
+    padding-top: 0.6rem;
+  }
+
+  .topbar {
+    margin-top: 0.45rem;
+    border-radius: 12px;
+  }
+
+  .brand-text {
+    font-size: 1.15rem;
+  }
+
+  .nav-toggle span {
+    display: none;
+  }
+
+  .section-nav a {
+    font-size: 0.78rem;
+  }
+
+  .slide {
+    border-radius: 14px;
+  }
+
+  .h-250,
+  .h-300,
+  .h-350,
+  .h-400 {
+    min-height: 180px;
+  }
+
+  .table-wrap {
+    border-radius: 12px;
+  }
+
+  th,
+  td {
+    padding: 0.72rem 0.65rem;
   }
 }

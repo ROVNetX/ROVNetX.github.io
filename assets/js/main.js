@@ -22,6 +22,110 @@
   }
 })();
 
+// ── Video popup (kart videolari icin) ───────────────────────────────────────
+const videoModal = document.getElementById('videoModal');
+const videoModalPlayer = document.getElementById('videoModalPlayer');
+const videoModalClose = document.getElementById('videoModalClose');
+const videoModalCaption = document.getElementById('videoModalCaption');
+
+if (videoModal && videoModalPlayer && videoModalClose && videoModalCaption) {
+  const videoCards = Array.from(document.querySelectorAll('.video-card, .insight-card'));
+  const isHoverDevice = window.matchMedia('(hover: hover)').matches;
+
+  const openVideoModal = (sourceVideo, captionText) => {
+    if (!sourceVideo) {
+      return;
+    }
+
+    const source = sourceVideo.currentSrc || sourceVideo.getAttribute('src') || sourceVideo.querySelector('source')?.getAttribute('src');
+    if (!source) {
+      return;
+    }
+
+    videoModalPlayer.src = source;
+    videoModalPlayer.currentTime = 0;
+    videoModalPlayer.loop = true;
+    videoModalPlayer.muted = false;
+    videoModalCaption.textContent = captionText || 'Video oynatiliyor';
+
+    videoModal.classList.add('is-open');
+    videoModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+
+    const playAttempt = videoModalPlayer.play();
+    if (playAttempt !== undefined) {
+      playAttempt.catch(() => {
+        // Kullanici etkileşimi gerekirse controls aktif oldugu icin manuel baslatilir.
+      });
+    }
+  };
+
+  const closeVideoModal = () => {
+    videoModal.classList.remove('is-open');
+    videoModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    videoModalPlayer.pause();
+    videoModalPlayer.removeAttribute('src');
+    videoModalPlayer.load();
+    videoModalCaption.textContent = '';
+  };
+
+  for (const card of videoCards) {
+    const cardVideo = card.querySelector('video');
+    if (!cardVideo) {
+      continue;
+    }
+
+    const caption = card.querySelector('h4, figcaption')?.textContent?.trim() || 'Video oynatiliyor';
+    let hoverTimer = null;
+
+    card.classList.add('video-popup-trigger');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${caption} videosunu popup olarak ac`);
+
+    card.addEventListener('click', () => {
+      openVideoModal(cardVideo, caption);
+    });
+
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openVideoModal(cardVideo, caption);
+      }
+    });
+
+    if (isHoverDevice) {
+      card.addEventListener('mouseenter', () => {
+        hoverTimer = window.setTimeout(() => {
+          openVideoModal(cardVideo, caption);
+        }, 450);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (hoverTimer) {
+          window.clearTimeout(hoverTimer);
+          hoverTimer = null;
+        }
+      });
+    }
+  }
+
+  videoModalClose.addEventListener('click', closeVideoModal);
+
+  videoModal.addEventListener('click', (event) => {
+    if (event.target === videoModal) {
+      closeVideoModal();
+    }
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && videoModal.classList.contains('is-open')) {
+      closeVideoModal();
+    }
+  });
+}
+
 // ── Scroll reveal animasyonları ────────────────────────────────────────────
 const revealTargets = document.querySelectorAll('.reveal');
 
