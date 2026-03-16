@@ -253,11 +253,11 @@ const scrollToSection = (targetId) => {
   const isSharedChild = Boolean(sharedSlide && targetSection.closest('#slideShared') && targetSection !== sharedSlide);
 
   if (isSharedChild && sharedSlide) {
-    sharedSlide.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start'
-    });
+    if (deck) {
+      deck.scrollTo({ left: sharedSlide.offsetLeft, behavior: 'smooth' });
+    } else {
+      sharedSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    }
 
     sharedSlide.scrollTo({
       top: Math.max(0, targetSection.offsetTop - 12),
@@ -266,11 +266,11 @@ const scrollToSection = (targetId) => {
     return;
   }
 
-  targetSection.scrollIntoView({
-    behavior: 'smooth',
-    block: 'nearest',
-    inline: 'start'
-  });
+  if (deck) {
+    deck.scrollTo({ left: targetSection.offsetLeft, behavior: 'smooth' });
+  } else {
+    targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
 
   if (targetSection === sharedSlide && sharedSlide) {
     sharedSlide.scrollTo({
