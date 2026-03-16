@@ -22,41 +22,45 @@
 
 html {
   scroll-behavior: smooth;
+  background: #020510; /* video yüklenene kadar fallback */
 }
 
 body {
   margin: 0;
   color: var(--txt-main);
   font-family: "Space Grotesk", sans-serif;
-  background: #020510;
+  background: transparent;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
+/* ── Arka plan video katmanı ─────────────────────────── */
 .bg-video {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  min-width: 100%;
-  min-height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: -3;
-  filter: saturate(1.3) contrast(1.06) brightness(0.62);
+  z-index: 1;  /* body canvas'ın üzerinde, içeriğin altında */
+  pointer-events: none;
+  filter: saturate(1.3) contrast(1.06) brightness(0.60);
 }
 
+/* ── Renk/ışık overlay katmanı ───────────────────────── */
 .bg-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 8% 12%, rgba(65, 169, 255, 0.36), transparent 30%),
-    radial-gradient(circle at 86% 14%, rgba(57, 230, 190, 0.3), transparent 37%),
-    linear-gradient(165deg, rgba(2, 8, 22, 0.7), rgba(2, 7, 18, 0.82));
-  z-index: -2;
+    radial-gradient(circle at 8% 12%, rgba(65, 169, 255, 0.32), transparent 30%),
+    radial-gradient(circle at 86% 14%, rgba(57, 230, 190, 0.26), transparent 37%),
+    linear-gradient(165deg, rgba(2, 8, 22, 0.58), rgba(2, 7, 18, 0.68));
+  z-index: 2;
 }
 
+/* ── Grid ışık aurora katmanı ────────────────────────── */
 .aurora {
   position: fixed;
   inset: 0;
@@ -70,8 +74,10 @@ body {
   background-size: auto, auto, 36px 36px, 36px 36px, auto;
   mask-image: radial-gradient(circle at center, #000 28%, transparent 100%);
   opacity: 0.85;
-  z-index: -1;
+  z-index: 3;
 }
+
+/* ── Sayfa içeriği (her zaman arka planın üzerinde) ─── */
 
 a {
   color: inherit;
@@ -80,7 +86,7 @@ a {
 .topbar {
   position: sticky;
   top: 1rem;
-  z-index: 40;
+  z-index: 100;
   margin: 1rem auto 0;
   width: var(--slide-width);
   padding: 0.8rem 1rem;
@@ -163,6 +169,8 @@ a {
 }
 
 .deck {
+  position: relative;
+  z-index: 10;
   width: 100%;
   display: grid;
   gap: 2.4rem;
