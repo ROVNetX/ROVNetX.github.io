@@ -1,443 +1,282 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROVNet - Donanımdan Bağımsız Bilişsel Sürü Ekosistemi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        /* CORE DESIGN PRINCIPLES: Deep Sea / Defense Tech */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background-color: #020617;
-            display: grid;
-            gap: 40px;
-            grid-template-columns: 1fr;
-            min-height: 100vh;
-            padding: 40px 0;
-            place-items: center;
-        }
-        p { margin-bottom: 15px; }
-
-        .slide-container {
-            align-items: center;
-            background-color: #0f172a;
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(34, 211, 238, 0.1);
-            display: flex;
-            flex-direction: column;
-            font-family: 'Inter', sans-serif;
-            height: 720px;
-            justify-content: center;
-            overflow: hidden;
-            padding: 60px;
-            position: relative;
-            width: 1280px;
-        }
-
-        .slide-container::before {
-            content: '';
-            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            height: 100%;
-            left: 0; position: absolute; top: 0; width: 100%; z-index: 0;
-        }
-        .slide-container > * { position: relative; z-index: 1; }
-
-        /* TYPOGRAPHY */
-        .slide-container h1, .slide-container h2, .slide-container h3 {
-            color: #f8fafc; font-family: 'Orbitron', sans-serif; font-weight: 700;
-        }
-        .slide-container p, .slide-container li, .slide-container .subtitle, .slide-container td, .slide-container th {
-            color: #94a3b8; font-family: 'Inter', sans-serif;
-        }
-        .slide-container h1 { font-size: 64px; letter-spacing: 2px; text-transform: uppercase; }
-        .slide-container .slide-title {
-            color: #22d3ee; font-size: 36px; margin-bottom: 40px; text-align: left; width: 100%;
-            text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(34, 211, 238, 0.2); padding-bottom: 15px;
-        }
-        .slide-container h3 { font-size: 24px; margin-bottom: 15px; color: #e2e8f0; }
-        .slide-container p, .slide-container li { font-size: 18px; line-height: 1.6; }
-        .slide-container .subtitle { color: #22d3ee; font-size: 22px; font-weight: 300; letter-spacing: 1px; margin: 20px auto; max-width: 900px; text-transform: uppercase; }
-        
-        .highlight { color: #f8fafc; font-weight: 600; }
-        .accent { color: #22d3ee; }
-
-        .content-area { align-items: flex-start; display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-start; width: 100%; }
-
-        /* LAYOUTS */
-        .title-layout { text-align: center; }
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; width: 100%; align-items: center; }
-        .three-column { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; align-items: stretch; }
-
-        /* MEDIA STANDARDIZATION (Images, Videos & Iframes) */
-        .media-wrapper {
-            border-radius: 8px;
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-            background: #020617;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-        .media-wrapper img, .media-wrapper video, .media-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            display: block;
-            border: none;
-        }
-        /* Özel Yükseklikler */
-        .h-300 { height: 300px; }
-        .h-250 { height: 250px; }
-        .h-350 { height: 350px; }
-        .h-400 { height: 400px; }
-
-        /* 4'lü Video Grid Layout */
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 20px;
-            width: 100%;
-            height: 500px;
-        }
-        .video-card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(51, 65, 85, 0.8);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .video-card video {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #000;
-        }
-        .video-card .video-info {
-            padding: 15px;
-            flex-grow: 1;
-        }
-        .video-card .video-info h4 {
-            color: #22d3ee;
-            font-size: 16px;
-            margin-bottom: 5px;
-            font-family: 'Orbitron', sans-serif;
-        }
-        .video-card .video-info p {
-            font-size: 13px;
-            color: #94a3b8;
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        .bullet-list ul { list-style: none; }
-        .bullet-list li { margin-bottom: 20px; padding-left: 35px; position: relative; }
-        .bullet-list li::before { color: #22d3ee; content: '⯈'; font-size: 20px; left: 0; position: absolute; top: 0; }
-
-        .tiled-content { align-items: stretch; display: flex; gap: 30px; width: 100%; }
-        .tile {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
-            border-radius: 8px; border: 1px solid rgba(51, 65, 85, 0.8); border-top: 3px solid #22d3ee;
-            display: flex; flex-direction: column; flex: 1; padding: 30px; text-align: left;
-        }
-        .tile .icon { color: #22d3ee; font-size: 36px; margin-bottom: 20px; }
-        
-        /* Table Layout */
-        .table-layout { width: 100%; border-radius: 8px; overflow: hidden; border: 1px solid rgba(51, 65, 85, 0.8); }
-        .table-layout table { border-collapse: collapse; width: 100%; background-color: rgba(30, 41, 59, 0.4); }
-        .table-layout th, .table-layout td { border-bottom: 1px solid rgba(51, 65, 85, 0.8); padding: 18px 24px; text-align: left; }
-        .table-layout th { background-color: rgba(15, 23, 42, 0.9); color: #22d3ee; font-family: 'Orbitron', sans-serif; font-size: 16px; letter-spacing: 1px; }
-        .table-layout tr:last-child td { border-bottom: none; }
-        .table-layout td.price { color: #10b981; font-weight: 600; font-size: 18px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROVNet - Donanımdan Bağımsız Bilişsel Sürü Ekosistemi</title>
+  <meta name="description" content="ROVNet: Donanımdan bağımsız bilişsel su altı sürü ekosistemi sunumu.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <div class="aurora"></div>
 
-<!-- SLAYT 1: KAPAK -->
-<div class="slide-container" id="slide1" style="background: radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, #020617 100%);">
-    <div class="title-layout">
+  <header class="topbar glass reveal">
+    <a class="brand" href="#slide1" aria-label="ROVNet ana sayfa">
+      <span class="brand-mark">R</span>
+      <span class="brand-text">ROVNet</span>
+    </a>
+
+    <button id="navToggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="sectionNav">
+      <i class="fa-solid fa-bars"></i>
+      <span>Bölümler</span>
+    </button>
+
+    <nav id="sectionNav" class="section-nav" aria-label="Bölüm navigasyonu">
+      <a href="#slide1">Kapak</a>
+      <a href="#slide2">Platform</a>
+      <a href="#slide3">AMKS</a>
+      <a href="#slide4">SAM</a>
+      <a href="#slide5">Mimari</a>
+      <a href="#slide6">Testler</a>
+      <a href="#slide7">Gelir</a>
+      <a href="#slide8">Takım</a>
+      <a href="#slide9">Tecrübe</a>
+      <a href="#slide10">İletişim</a>
+    </nav>
+  </header>
+
+  <main class="deck">
+    <section class="slide hero reveal" id="slide1">
+      <div class="hero-inner">
+        <p class="eyebrow">TÜBİTAK 1812 BİGG Yatırımcı Sunumu</p>
         <h1>ROVNet</h1>
         <p class="subtitle">Donanımdan Bağımsız Bilişsel Su Altı Sürü Ekosistemi</p>
-        <p style="color: #f8fafc; font-size: 20px; margin-top: 40px; font-weight: 300; letter-spacing: 1px;">"Sessiz Derinliklerde Kesintisiz İletişim, Asimetrik Otonomi."</p>
-        <div style="margin-top: 60px; padding: 15px 30px; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 30px; display: inline-block; background: rgba(2, 6, 23, 0.6);">
-            <p style="margin: 0; color: #22d3ee; font-size: 14px; font-family: 'Orbitron', sans-serif;">TÜBİTAK 1812 BİGG Yatırımcı Sunumu & Saha Verileri</p>
+        <p class="quote">"Sessiz Derinliklerde Kesintisiz İletişim, Asimetrik Otonomi."</p>
+        <p class="tag">Saha Verileri ile Doğrulanmış Uygulamalı Ar-Ge Sunumu</p>
+      </div>
+    </section>
+
+    <section class="slide reveal" id="slide2">
+      <h2 class="slide-title">Fiziksel Platform ve İtki Matrisi</h2>
+      <p>Geliştirdiğimiz otonomi algoritmaları, 6-DoF (6 Serbestlik Dereceli) manevra kabiliyetine sahip BlueROV2 mimarisi üzerinde test edilmiştir. Bu sayede araçlar akıntı altında bile kusursuz stabilizasyon sağlar.</p>
+      <div class="grid-2 media-grid">
+        <figure>
+          <div class="media-shell h-300">
+            <img src="Pictures/BlueRov2.png" alt="BlueROV2 Genel Görünüm" loading="lazy">
+          </div>
+          <figcaption>BlueROV2 Fiziksel Arayüzü</figcaption>
+        </figure>
+        <figure>
+          <div class="media-shell h-300">
+            <img src="Pictures/Blurov2MotorYerlesimYerleri.png" alt="Motor Yerleşimleri" loading="lazy">
+          </div>
+          <figcaption>Motor Yerleşimleri ve Vektörel İtki Matrisi</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="slide reveal" id="slide3">
+      <h2 class="slide-title">AMKS: Matematiksel Doğrulama ve Konumlandırma</h2>
+      <p>Dışa bağımlı ve astronomik maliyetli konumlandırma sistemleri yerine geliştirdiğimiz özgün AMKS (Artırılabilir Menzilli Konumlandırma Sistemi) algoritması. Aşağıda, X, Y ve Z mesafeleri bilindiğinde ROV'un (nokta) Matplotlib ortamındaki teorik 3B hesaplama modelleri görülmektedir.</p>
+      <div class="grid-3 media-grid">
+        <div class="media-shell h-250">
+          <img src="Pictures/AMKS1.jpg" alt="AMKS Koordinat Hesaplama 1" loading="lazy">
         </div>
-    </div>
-</div>
-
-<!-- SLAYT 2: MEKANİK ALTYAPI VE ARAÇ (BlueRov2 Görselleri) -->
-<div class="slide-container" id="slide2">
-    <h2 class="slide-title">Fiziksel Platform ve İtki Matrisi</h2>
-    <div class="content-area">
-        <p style="margin-bottom: 25px;">Geliştirdiğimiz otonomi algoritmaları, 6-DoF (6 Serbestlik Dereceli) manevra kabiliyetine sahip BlueROV2 mimarisi üzerinde test edilmiştir. Bu sayede araçlar akıntı altında bile kusursuz stabilizasyon sağlar.</p>
-        <div class="two-column">
-            <div>
-                <div class="media-wrapper h-300">
-                    <img src="Pictures/BlueRov2.png" alt="BlueROV2 Genel Görünüm">
-                </div>
-                <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #22d3ee;">BlueROV2 Fiziksel Arayüzü</p>
-            </div>
-            <div>
-                <div class="media-wrapper h-300">
-                    <img src="Pictures/Blurov2MotorYerlesimYerleri.png" alt="Motor Yerleşimleri">
-                </div>
-                <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #22d3ee;">Motor Yerleşimleri ve Vektörel İtki Matrisi</p>
-            </div>
+        <div class="media-shell h-250">
+          <img src="Pictures/AMKS2.jpg" alt="AMKS Koordinat Hesaplama 2" loading="lazy">
         </div>
-    </div>
-</div>
-
-<!-- SLAYT 3: MATEMATİKSEL DOĞRULAMA (AMKS Koordinat Resimleri) -->
-<div class="slide-container" id="slide3">
-    <h2 class="slide-title">AMKS: Matematiksel Doğrulama ve Konumlandırma</h2>
-    <div class="content-area">
-        <p style="margin-bottom: 30px;">Dışa bağımlı ve astronomik maliyetli konumlandırma sistemleri yerine geliştirdiğimiz özgün AMKS (Artırılabilir Menzilli Konumlandırma Sistemi) algoritması. Aşağıda, X, Y ve Z mesafeleri bilindiğinde ROV'un (nokta) Matplotlib ortamındaki teorik 3B hesaplama modelleri görülmektedir.</p>
-        <div class="three-column">
-            <div>
-                <div class="media-wrapper h-250">
-                    <img src="Pictures/AMKS1.jpg" alt="AMKS Koordinat Hesaplama 1">
-                </div>
-            </div>
-            <div>
-                <div class="media-wrapper h-250">
-                    <img src="Pictures/AMKS2.jpg" alt="AMKS Koordinat Hesaplama 2">
-                </div>
-            </div>
-            <div>
-                <div class="media-wrapper h-250">
-                    <img src="Pictures/AMKS3.jpg" alt="AMKS Koordinat Hesaplama 3">
-                </div>
-            </div>
+        <div class="media-shell h-250">
+          <img src="Pictures/AMKS3.jpg" alt="AMKS Koordinat Hesaplama 3" loading="lazy">
         </div>
-        <p style="text-align: center; margin-top: 20px; width: 100%; color: #22d3ee; font-family: 'Orbitron', sans-serif;">Derinlik ve Akustik Dalga Yansıması Kesitlemeleri</p>
-    </div>
-</div>
+      </div>
+      <p class="center-note">Derinlik ve Akustik Dalga Yansıması Kesitlemeleri</p>
+    </section>
 
-<!-- SLAYT 4: SİNYAL VE HABERLEŞME ALTYAPISI (Frekans & Modülasyon) -->
-<div class="slide-container" id="slide4">
-    <h2 class="slide-title">Sualtı Akustik Modem (SAM) Sinyal Analizi</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div class="bullet-list">
-                <p style="margin-bottom: 20px;">Su altında elektromanyetik dalgaların sönümlenmesi nedeniyle iletişim kısıtlıdır. Sürü zekasının çekirdeği olan haberleşme için özel sinyal modülasyonları tasarlanmıştır:</p>
-                <ul>
-                    <li><span class="highlight">Modüle Edilmiş Sinyal:</span> Parazit ve gürültüyü minimize ederek verinin su altı akustiğinde uzak mesafelere kayıpsız iletilmesini sağlar.</li>
-                    <li><span class="highlight">Canlı Frekans Spektrumu:</span> Donanım üzerinden canlı olarak ölçülen, sinyalin frekans bandındaki kararlılığını gösteren spektrum analizi (Sağda).</li>
-                </ul>
-                <div class="media-wrapper h-250" style="margin-top: 20px;">
-                    <img src="Pictures/moduleedilmissinyal.jpg" alt="Modüle Edilmiş Sinyal">
-                </div>
-                <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #22d3ee;">Teorik Modülasyon Çıktısı</p>
+    <section class="slide reveal" id="slide4">
+      <h2 class="slide-title">Sualtı Akustik Modem (SAM) Sinyal Analizi</h2>
+      <div class="grid-2 content-split">
+        <div class="bullet-panel glass">
+          <p>Su altında elektromanyetik dalgaların sönümlenmesi nedeniyle iletişim kısıtlıdır. Sürü zekasının çekirdeği olan haberleşme için özel sinyal modülasyonları tasarlanmıştır:</p>
+          <ul class="bullet-list">
+            <li><strong>Modüle Edilmiş Sinyal:</strong> Parazit ve gürültüyü minimize ederek verinin su altı akustiğinde uzak mesafelere kayıpsız iletilmesini sağlar.</li>
+            <li><strong>Canlı Frekans Spektrumu:</strong> Donanım üzerinden canlı olarak ölçülen, sinyalin frekans bandındaki kararlılığını gösteren spektrum analizi (sağda).</li>
+          </ul>
+          <figure>
+            <div class="media-shell h-250">
+              <img src="Pictures/moduleedilmissinyal.jpg" alt="Modüle Edilmiş Sinyal" loading="lazy">
             </div>
-            <div>
-                <div class="media-wrapper h-400">
-                    <video autoplay loop muted playsinline>
-                        <!-- Klasör "Videos" olarak güncellendi -->
-                        <source src="Videos/web_canliFrekansSpekturumu_fixed.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <p style="text-align: center; margin-top: 10px; font-size: 14px; color: #10b981;">Canlı Frekans Spektrumu Okuması (Çalışıyor)</p>
-            </div>
+            <figcaption>Teorik Modülasyon Çıktısı</figcaption>
+          </figure>
         </div>
-    </div>
-</div>
 
-<!-- SLAYT 5: OTONOMİ MİMARİSİ (İlk Prensipler) -->
-<div class="slide-container" id="slide5">
-    <h2 class="slide-title">"İlk Prensipler" Mimarisi: 3 Katmanlı Bilişsel Sürü</h2>
-    <div class="content-area">
-        <p style="margin-bottom: 30px;">LLM tabanlı karar mekanizmalarını entegre eden, araçların "kara kutu" olmadan tamamen otonom çalıştığı hiyerarşik yapı:</p>
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-route"></i></div>
-                <h3>1. Global Stratejik Planlayıcı (A*)</h3>
-                <p>Görevin genel verimliliğini yönetir. Bilinen statik engelleri analiz ederek enerji tüketimini minimize eden en optimal rotaları hesaplar.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-bezier-curve"></i></div>
-                <h3>2. Yerel Taktiksel Planlayıcı</h3>
-                <p>Sensörlerle haritada olmayan engeller tespit edildiğinde devreye girer. Ana rotayı terk etmeden güvenli bir sapma (detour) oluşturur.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-microchip"></i></div>
-                <h3>3. Anlık Adaptif Refleks (RL)</h3>
-                <p>Derin Pekiştirmeli Öğrenme ile dinamik tehditlere <span class="highlight">0.2 saniye</span> gibi sürede tepki vererek çarpışmaları önleyen kayıp toleranslı sistemdir.</p>
-            </div>
-        </div>
-    </div>
-</div>
+        <figure>
+          <div class="media-shell h-400">
+            <video autoplay loop muted playsinline>
+              <source src="Videos/web_canliFrekansSpekturumu_fixed.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption class="ok">Canlı Frekans Spektrumu Okuması (Çalışıyor)</figcaption>
+        </figure>
+      </div>
+    </section>
 
-<!-- SLAYT 6: SAHA TESTLERİ VE SİMÜLASYON VİDEOLARI (Video Matrisi) -->
-<div class="slide-container" id="slide6">
-    <h2 class="slide-title">Saha Testleri ve Simülasyon Doğrulamaları</h2>
-    <div class="content-area">
-        <div class="video-grid">
-            <!-- Video 1 -->
-            <div class="video-card">
-                <video autoplay loop muted playsinline>
-                    <source src="Videos/web_mesajsending2_20sSonrasi_2xhizli_ppt_uyumlu.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>1. AMKS Protokolü (THS 3-4)</h4>
-                    <p>TÜBİTAK 2209-A kapsamında geliştirilen prototip üzerinden sağlanan başarılı haberleşme testi.</p>
-                </div>
-            </div>
-            <!-- Video 2 -->
-            <div class="video-card">
-                <video autoplay loop muted playsinline>
-                    <source src="Videos/web_prototip_converted.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>2. Donanım Prototipi İletişim Testi</h4>
-                    <p>İletişim protokollerinin optimize edilerek hızlandırılmış donanımsal doğrulama süreci.</p>
-                </div>
-            </div>
-            <!-- Video 3 -->
-            <div class="video-card">
-                <video autoplay loop muted playsinline>
-                    <source src="Videos/web_mauv_compressed.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>3. ROS Bilişsel Sürü Simülasyonu</h4>
-                    <p>Kısıtlı iletişim ortamında Çoklu ROV'ların (Swarm) birbirlerine çarpmadan otonom filo yönetimi.</p>
-                </div>
-            </div>
-            <!-- Video 4 -->
-            <div class="video-card">
-                <video autoplay loop muted playsinline>
-                    <source src="Videos/web_submarine_converted.mp4" type="video/mp4">
-                </video>
-                <div class="video-info">
-                    <h4>4. Ursina AMKS Veri İletimi</h4>
-                    <p>AMKS konumlandırma protokolünün Python/Ursina ortamında görselleştirilen ilkel simülasyonu.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <section class="slide reveal" id="slide5">
+      <h2 class="slide-title">"İlk Prensipler" Mimarisi: 3 Katmanlı Bilişsel Sürü</h2>
+      <p>LLM tabanlı karar mekanizmalarını entegre eden, araçların "kara kutu" olmadan tamamen otonom çalıştığı hiyerarşik yapı:</p>
+      <div class="grid-3 tiles">
+        <article class="tile">
+          <i class="fa-solid fa-route"></i>
+          <h3>1. Global Stratejik Planlayıcı (A*)</h3>
+          <p>Görevin genel verimliliğini yönetir. Bilinen statik engelleri analiz ederek enerji tüketimini minimize eden en optimal rotaları hesaplar.</p>
+        </article>
+        <article class="tile">
+          <i class="fa-solid fa-bezier-curve"></i>
+          <h3>2. Yerel Taktiksel Planlayıcı</h3>
+          <p>Sensörlerle haritada olmayan engeller tespit edildiğinde devreye girer. Ana rotayı terk etmeden güvenli bir sapma (detour) oluşturur.</p>
+        </article>
+        <article class="tile">
+          <i class="fa-solid fa-microchip"></i>
+          <h3>3. Anlık Adaptif Refleks (RL)</h3>
+          <p>Derin Pekiştirmeli Öğrenme ile dinamik tehditlere <strong>0.2 saniye</strong> gibi sürede tepki vererek çarpışmaları önleyen kayıp toleranslı sistemdir.</p>
+        </article>
+      </div>
+    </section>
 
-<!-- SLAYT 7: TİCARİ GELİR MODELİ -->
-<div class="slide-container" id="slide7">
-    <h2 class="slide-title">Gelir Modeli ve Ticarileşme Stratejisi</h2>
-    <div class="content-area">
-        <div class="table-layout">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ürün / Hizmet Segmenti</th>
-                        <th>Operasyonel Görev Tanımı</th>
-                        <th>Yıllık Hacim Öngörüsü</th>
-                        <th>Araç/Lisans Hedef Bedeli</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Tip 1: Askeri & Stratejik</strong></td>
-                        <td>Donanmalar için silahlı/silahsız otonom keşif ve koruma sürüleri. Hedef tespit ve imhası.</td>
-                        <td>2 Sürü (6 ROV)</td>
-                        <td class="price">~9.500.000 ₺</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tip 2: Sivil & Ticari Satış</strong></td>
-                        <td>Baraj hasar tespiti, batık keşfi ve su ürünleri ağ kontrolü için hafif donanımlı ROV'lar.</td>
-                        <td>4 Sürü (12 ROV)</td>
-                        <td class="price">~2.000.000 ₺</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tip 3: SaaS (Yazılım Lisans)</strong></td>
-                        <td>Diğer üreticilere donanım-bağımsız ROVNet işletim sistemi ve haberleşme (SAM) lisansı.</td>
-                        <td>~10 Araç Lisansı</td>
-                        <td class="price">~100.000 ₺ / Ay</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tip 3: RaaS & Teknik Servis</strong></td>
-                        <td>KOBİ'ler için donanım kiralama, operasyon sonrası veri sağlama ve yedek parça/bakım.</td>
-                        <td>5 Araç Kira + Servis</td>
-                        <td class="price">~150.000 ₺ / Ay</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+    <section class="slide reveal" id="slide6">
+      <h2 class="slide-title">Saha Testleri ve Simülasyon Doğrulamaları</h2>
+      <div class="video-grid">
+        <article class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Videos/web_mesajsending2_20sSonrasi_2xhizli_ppt_uyumlu.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <h4>1. AMKS Protokolü (THS 3-4)</h4>
+            <p>TÜBİTAK 2209-A kapsamında geliştirilen prototip üzerinden sağlanan başarılı haberleşme testi.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Videos/web_prototip_converted.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <h4>2. Donanım Prototipi İletişim Testi</h4>
+            <p>İletişim protokollerinin optimize edilerek hızlandırılmış donanımsal doğrulama süreci.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Videos/web_mauv_compressed.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <h4>3. ROS Bilişsel Sürü Simülasyonu</h4>
+            <p>Kısıtlı iletişim ortamında çoklu ROV'ların (swarm) birbirlerine çarpmadan otonom filo yönetimi.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <video autoplay loop muted playsinline>
+            <source src="Videos/web_submarine_converted.mp4" type="video/mp4">
+          </video>
+          <div class="video-info">
+            <h4>4. Ursina AMKS Veri İletimi</h4>
+            <p>AMKS konumlandırma protokolünün Python/Ursina ortamında görselleştirilen ilkel simülasyonu.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-<!-- SLAYT 8: TAKIM -->
-<div class="slide-container" id="slide8">
-    <h2 class="slide-title">Çekirdek Ar-Ge ve Yönetim Kadrosu</h2>
-    <div class="content-area">
-        <div class="three-column">
-            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(51, 65, 85, 0.8); border-top: 3px solid #22d3ee; border-radius: 8px; padding: 25px;">
-                <h3 style="font-size: 22px; color: #f8fafc; margin-bottom: 5px;">Ömer Faruk Çelik</h3>
-                <p style="color: #22d3ee; font-weight: 600; font-size: 14px; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Kurucu / Otonomi Mimarı</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• Hacettepe Üniv. (Fizik Müh.) temelli, Fırat Üniv. Bilgisayar Müh. son sınıf öğrencisi.</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• TÜBİTAK 2209-A AMKS ve SAM iletişim protokolü donanım geliştiricisi.</p>
-                <p style="font-size: 14px; margin-bottom: 0;">• Donanımdan bağımsız "İlk Prensipler" otonomi mimarisinin kurucusu.</p>
-            </div>
-            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(51, 65, 85, 0.8); border-top: 3px solid #22d3ee; border-radius: 8px; padding: 25px;">
-                <h3 style="font-size: 22px; color: #f8fafc; margin-bottom: 5px;">Hasan Gökhan Mercan</h3>
-                <p style="color: #22d3ee; font-weight: 600; font-size: 14px; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">Kurucu Ortak / YZ Sorumlusu</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• Yazılım mimarisi, yapay zeka ve endüstriyel otomasyon alanında uzman.</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• Kriptarium Ar-Ge bünyesinde hareket/uzuv algılama takip sistemleri geliştiricisi.</p>
-                <p style="font-size: 14px; margin-bottom: 0;">• HGM Yazılım kurucusu; yapay zeka destekli görüntü işleme yazılımları entegratörü.</p>
-            </div>
-             <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(51, 65, 85, 0.8); border-top: 3px solid #22d3ee; border-radius: 8px; padding: 25px;">
-                <h3 style="font-size: 22px; color: #f8fafc; margin-bottom: 5px;">Enes Aysan</h3>
-                <p style="color: #22d3ee; font-weight: 600; font-size: 14px; margin-bottom: 15px; font-family: 'Orbitron', sans-serif;">İş Geliştirme & Operasyon</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• Endüstri Mühendisi; üretim optimizasyonu, proses takibi ve ticarileştirme uzmanı.</p>
-                <p style="font-size: 14px; margin-bottom: 10px;">• Karakaya86'da Ford/Mercedes yatırım onaylı (24M ₺) YZ hata kontrol projesi yöneticisi.</p>
-                <p style="font-size: 14px; margin-bottom: 0;">• Patent, pazar analizi, lojistik süreç iyileştirme ve seri üretim operasyon sorumlusu.</p>
-            </div>
-        </div>
-    </div>
-</div>
+    <section class="slide reveal" id="slide7">
+      <h2 class="slide-title">Gelir Modeli ve Ticarileşme Stratejisi</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ürün / Hizmet Segmenti</th>
+              <th>Operasyonel Görev Tanımı</th>
+              <th>Yıllık Hacim Öngörüsü</th>
+              <th>Araç/Lisans Hedef Bedeli</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tip 1: Askeri & Stratejik</strong></td>
+              <td>Donanmalar için silahlı/silahsız otonom keşif ve koruma sürüleri. Hedef tespit ve imhası.</td>
+              <td>2 Sürü (6 ROV)</td>
+              <td class="price">~9.500.000 TL</td>
+            </tr>
+            <tr>
+              <td><strong>Tip 2: Sivil & Ticari Satış</strong></td>
+              <td>Baraj hasar tespiti, batık keşfi ve su ürünleri ağ kontrolü için hafif donanımlı ROV'lar.</td>
+              <td>4 Sürü (12 ROV)</td>
+              <td class="price">~2.000.000 TL</td>
+            </tr>
+            <tr>
+              <td><strong>Tip 3: SaaS (Yazılım Lisans)</strong></td>
+              <td>Diğer üreticilere donanım-bağımsız ROVNet işletim sistemi ve haberleşme (SAM) lisansı.</td>
+              <td>~10 Araç Lisansı</td>
+              <td class="price">~100.000 TL / Ay</td>
+            </tr>
+            <tr>
+              <td><strong>Tip 3: RaaS & Teknik Servis</strong></td>
+              <td>KOBİ'ler için donanım kiralama, operasyon sonrası veri sağlama ve yedek parça/bakım.</td>
+              <td>5 Araç Kira + Servis</td>
+              <td class="price">~150.000 TL / Ay</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-<!-- SLAYT 9: GEÇMİŞ SAHA VE DONANIM TECRÜBESİ (Yeni Slayt) -->
-<div class="slide-container" id="slide9">
-    <h2 class="slide-title">Saha ve Donanım Tecrübesi (TEKNOFEST Atılay)</h2>
-    <div class="content-area">
-        <p style="margin-bottom: 30px;">Ar-Ge ekibimizin donanım entegrasyonu, sızdırmazlık, itki sistemleri ve zorlu şartlarda su altı araç dinamiği konusundaki pratik saha tecrübesi, TEKNOFEST İnsansız Su Altı Sistemleri yarışmalarındaki geçmiş otonom test başarılarına dayanmaktadır.</p>
-        <div class="two-column">
-            <div>
-                <div class="media-wrapper h-350">
-                    <iframe src="https://www.youtube.com/embed/j4oMw1Uq-Ok?rel=0" title="Atılay 2023 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <p style="text-align: center; margin-top: 15px; font-size: 16px; color: #22d3ee; font-family: 'Orbitron', sans-serif;">2023 Atılay Takımı Araç Testi</p>
-            </div>
-            <div>
-                <div class="media-wrapper h-350">
-                    <iframe src="https://www.youtube.com/embed/mgCD8IVWUrQ?rel=0" title="Atılay 2024 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <p style="text-align: center; margin-top: 15px; font-size: 16px; color: #22d3ee; font-family: 'Orbitron', sans-serif;">2024 Atılay Takımı Araç Testi</p>
-            </div>
-        </div>
-    </div>
-</div>
+    <section class="slide reveal" id="slide8">
+      <h2 class="slide-title">Çekirdek Ar-Ge ve Yönetim Kadrosu</h2>
+      <div class="grid-3 team-grid">
+        <article class="member-card">
+          <h3>Ömer Faruk Çelik</h3>
+          <p class="role">Kurucu / Otonomi Mimarı</p>
+          <p>Hacettepe Üniv. (Fizik Müh.) temelli, Fırat Üniv. Bilgisayar Müh. son sınıf öğrencisi.</p>
+          <p>TÜBİTAK 2209-A AMKS ve SAM iletişim protokolü donanım geliştiricisi.</p>
+          <p>Donanımdan bağımsız "İlk Prensipler" otonomi mimarisinin kurucusu.</p>
+        </article>
+        <article class="member-card">
+          <h3>Hasan Gökhan Mercan</h3>
+          <p class="role">Kurucu Ortak / YZ Sorumlusu</p>
+          <p>Yazılım mimarisi, yapay zeka ve endüstriyel otomasyon alanında uzman.</p>
+          <p>Kriptarium Ar-Ge bünyesinde hareket/uzuv algılama takip sistemleri geliştiricisi.</p>
+          <p>HGM Yazılım kurucusu; yapay zeka destekli görüntü işleme yazılımları entegratörü.</p>
+        </article>
+        <article class="member-card">
+          <h3>Enes Aysan</h3>
+          <p class="role">İş Geliştirme & Operasyon</p>
+          <p>Endüstri Mühendisi; üretim optimizasyonu, proses takibi ve ticarileştirme uzmanı.</p>
+          <p>Karakaya86'da Ford/Mercedes yatırım onaylı (24M TL) YZ hata kontrol projesi yöneticisi.</p>
+          <p>Patent, pazar analizi, lojistik süreç iyileştirme ve seri üretim operasyon sorumlusu.</p>
+        </article>
+      </div>
+    </section>
 
-<!-- SLAYT 10: İLETİŞİM VE İLGİLİ BAĞLANTILAR -->
-<div class="slide-container" id="slide10">
-    <div style="text-align: center; width: 100%;">
-        <h2 style="font-size: 48px; margin-bottom: 20px; color: #22d3ee;">Bizi İnceleyin</h2>
-        <p style="color: #94a3b8; max-width: 800px; margin: 0 auto 40px auto; font-size: 18px;">
-            Projeye dair akademik kodlarımıza, geçmiş deneyimlerimize ve "İlk Prensipler" (First Principles) yaklaşımıyla kurduğumuz sürü zekası simülasyon repolarına GitHub üzerinden ulaşabilirsiniz.
-        </p>
+    <section class="slide reveal" id="slide9">
+      <h2 class="slide-title">Saha ve Donanım Tecrübesi (TEKNOFEST Atılay)</h2>
+      <p>Ar-Ge ekibimizin donanım entegrasyonu, sızdırmazlık, itki sistemleri ve zorlu şartlarda su altı araç dinamiği konusundaki pratik saha tecrübesi, TEKNOFEST İnsansız Su Altı Sistemleri yarışmalarındaki geçmiş otonom test başarılarına dayanmaktadır.</p>
+      <div class="grid-2 media-grid">
+        <figure>
+          <div class="media-shell h-350">
+            <iframe src="https://www.youtube.com/embed/j4oMw1Uq-Ok?rel=0" title="Atılay 2023 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>2023 Atılay Takımı Araç Testi</figcaption>
+        </figure>
+        <figure>
+          <div class="media-shell h-350">
+            <iframe src="https://www.youtube.com/embed/mgCD8IVWUrQ?rel=0" title="Atılay 2024 Takımı Araç Test Videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>2024 Atılay Takımı Araç Testi</figcaption>
+        </figure>
+      </div>
+    </section>
 
-        <div style="margin-top: 60px; padding: 40px; background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(51, 65, 85, 0.8); border-radius: 12px; display: inline-block;">
-            <p style="font-size: 20px; color: #f8fafc; margin-bottom: 20px;"><i class="fa-solid fa-envelope" style="color: #22d3ee; margin-right: 12px; font-size: 24px;"></i> faruktrhakan@hotmail.com</p>
-            <p style="font-size: 20px; color: #f8fafc; margin-bottom: 0;"><i class="fa-brands fa-github" style="color: #22d3ee; margin-right: 12px; font-size: 24px;"></i> github.com/omerfaruk-celik</p>
-        </div>
-        
-        <p style="margin-top: 40px; font-size: 14px; color: #475569; font-family: 'Orbitron', sans-serif;">
-            ROVNet © 2026 | TÜBİTAK BİGG 1812
-        </p>
-    </div>
-</div>
+    <section class="slide reveal contact" id="slide10">
+      <h2>Bizi İnceleyin</h2>
+      <p>Projeye dair akademik kodlarımıza, geçmiş deneyimlerimize ve "İlk Prensipler" yaklaşımıyla kurduğumuz sürü zekası simülasyon repolarına GitHub üzerinden ulaşabilirsiniz.</p>
+      <div class="contact-card glass">
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:faruktrhakan@hotmail.com">faruktrhakan@hotmail.com</a></p>
+        <p><i class="fa-brands fa-github"></i> <a href="https://github.com/omerfaruk-celik" target="_blank" rel="noopener noreferrer">github.com/omerfaruk-celik</a></p>
+      </div>
+      <p class="copyright">ROVNet © 2026 | TÜBİTAK BİGG 1812</p>
+    </section>
+  </main>
 
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
