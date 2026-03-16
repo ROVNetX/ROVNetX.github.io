@@ -2259,10 +2259,24 @@ body.modal-open {
   }
 
   .single-experience .slide {
-    flex-basis: calc(100vw - 1rem);
-    width: calc(100vw - 1rem);
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 100%;
     height: calc(100vh - 6.55rem);
     min-height: calc(100vh - 6.55rem);
+  }
+
+  .single-experience .slide > * {
+    min-width: 0;
+  }
+
+  .media-shell img,
+  .media-shell video,
+  .media-shell iframe,
+  .video-card video,
+  .hero-logo,
+  .member-photo {
+    max-width: 100%;
   }
 
   .topbar {
