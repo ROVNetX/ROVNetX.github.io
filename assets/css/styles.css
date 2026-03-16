@@ -2369,6 +2369,11 @@ body.modal-open {
     min-width: 0;
   }
 
+  #slideShared .stack-section {
+    overflow: visible;
+    padding: 0.95rem 0.85rem;
+  }
+
   #slideShared figure,
   #slideShared .media-shell,
   #slideShared .bullet-panel,
@@ -2385,6 +2390,23 @@ body.modal-open {
   #slideShared .stack-section h4,
   #slideShared figcaption {
     overflow-wrap: anywhere;
+  }
+
+  #slideShared .slide-title,
+  #slideShared .stack-section h2,
+  #slideShared .stack-section h3,
+  #slideShared .stack-section h4,
+  #slideShared figcaption {
+    white-space: normal;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  #slideShared .media-shell,
+  #slideShared .sam-equal-media {
+    height: auto;
+    max-height: none;
+    aspect-ratio: 16 / 10;
   }
 
   #slideShared figcaption {
@@ -2404,6 +2426,15 @@ body.modal-open {
 
     .bg-overlay {
       background: linear-gradient(165deg, rgba(2, 8, 22, 0.72), rgba(2, 7, 18, 0.82));
+    }
+
+    #slideShared .stack-section,
+    #slideShared .amks-flow-shell,
+    #slideShared .tile,
+    #slideShared .video-card,
+    #slideShared .insight-card,
+    #slideShared .bullet-panel {
+      box-shadow: none;
     }
   }
 }
