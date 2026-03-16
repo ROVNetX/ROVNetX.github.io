@@ -28,13 +28,31 @@ body {
   margin: 0;
   color: var(--txt-main);
   font-family: "Space Grotesk", sans-serif;
-  background:
-    radial-gradient(circle at 8% 12%, rgba(65, 169, 255, 0.3), transparent 28%),
-    radial-gradient(circle at 86% 14%, rgba(57, 230, 190, 0.24), transparent 35%),
-    linear-gradient(165deg, rgba(2, 8, 22, 0.86), rgba(2, 7, 18, 0.9)),
-    url("../../Pictures/Ocean.jpeg") center / cover fixed no-repeat;
-  background-blend-mode: screen, screen, multiply, normal;
+  background: var(--bg-deep);
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -3;
+  filter: saturate(1.22) contrast(1.05) brightness(0.58);
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(65, 169, 255, 0.36), transparent 30%),
+    radial-gradient(circle at 86% 14%, rgba(57, 230, 190, 0.3), transparent 37%),
+    linear-gradient(165deg, rgba(2, 8, 22, 0.7), rgba(2, 7, 18, 0.82));
+  z-index: -2;
 }
 
 .aurora {
@@ -662,10 +680,6 @@ tr:last-child td {
 @media (max-width: 760px) {
   :root {
     --slide-width: calc(100% - 1rem);
-  }
-
-  body {
-    background-attachment: scroll;
   }
 
   .topbar {
